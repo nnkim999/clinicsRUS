@@ -1,6 +1,7 @@
 // src/LandingPage.js
 import React from 'react';
 import '../Styles/LandingPage.css'; 
+import '../App.css';
 
 function LandingPage() {
   return (
