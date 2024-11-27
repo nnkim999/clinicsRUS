@@ -9,8 +9,8 @@ import clinicsruslogo2 from "../Assets/ClinicsRUs.png";
 // import line27 from "./line-27.svg";
 // import rightSide from "./right-side.png";
 // import "./style.css";
-import vector1 from "./vector-1.svg";
-import vector2 from "./vector-2.svg";
+// import vector1 from "./vector-1.svg";
+// import vector2 from "./vector-2.svg";
 
 // function ManageAppointment() {
 //   return (
