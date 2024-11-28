@@ -1,0 +1,167 @@
+.appointment-table {
+    display: grid;
+    grid-template-columns: 100px repeat(2, 1fr); /* One column for times, two for dates */
+    border: 1px solid #ddd;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-header {
+    display: contents;
+  }
+  
+  .time-column,
+  .date-column {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+  }
+  
+  .date-column {
+    border-left: 1px solid #ddd;
+  }
+  
+  .table-body {
+    display: contents;
+  }
+  
+  .time-row {
+    display: contents;
+  }
+  
+  .time-cell {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-weight: bold;
+  }
+  
+  .appointment-cell {
+    padding: 10px;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative; /* To position the content inside the cell */
+  }
+  
+  .appointment-cell:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .appointment-cell.booked {
+    background-color: #90caf9;
+    color: #fff;
+  }
+  
+  .appointment-cell.available {
+    background-color: white;
+  }
+
+  /*buttons*/
+  .book-button {
+    background-color: #183E9F;
+    color: white;
+    padding: 0; /* Remove extra padding */
+    width: 100%; /* Make button take full width of the cell */
+    height: 100%; /* Make button take full height of the cell */
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative; /* To position child elements relative to the button */
+    display: flex;
+    flex-direction: column; /* Allow time and doctor to occupy separate corners */
+    justify-content: space-between; /* Distribute items within the button */
+  }
+  
+  .book-button.clicked {
+    background-color: #64EBB6; /* Green color for selected button */
+  }
+  
+  .book-button.clicked::after {
+    content: '✔'; /* Unicode checkmark */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+  }
+  
+  .button-content {
+    position: absolute;
+    top: 10px; /* Position time in top-left corner */
+    left: 10px;
+    font-size: 14px;
+  }
+  
+  .doctor-name {
+    position: absolute;
+    bottom: 10px; /* Position doctor's name in bottom-right corner */
+    right: 10px;
+    font-size: 14px;
+    text-align: right;
+  }
+  
+  .appointment-cell {
+    padding: 0; /* Remove padding from the cell */
+    height: 100px; /* Increase cell height to make buttons larger */
+    text-align: center;
+  }
+  
+  /*legend*/
+  .legend-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .legend-button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: default;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .legend-button.unavailable {
+    background-color: #e0e0e0;
+    color: #555;
+  }
+  
+  .legend-button.available {
+    background-color: #183E9F;
+    color: white;
+  }
+  
+  .legend-button.selected {
+    background-color: #64EBB6;
+    color: white;
+    position: relative;
+  }
+  
+  .legend-button.selected::after {
+    content: '✓';
+    position: absolute;
+    right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
