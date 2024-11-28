@@ -1,0 +1,133 @@
+.appointment-container {
+  font-family: Arial, sans-serif;
+  padding: 50px;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-button {
+  background-color: #183e9f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 3px 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.logo {
+  height: 40px;
+}
+
+main {
+  margin-top: 70px;
+}
+
+h1 {
+  color: #183e9f;
+  font-size: 24px;
+}
+
+.appointment-details {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.appointment-table {
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid #183e9f; /* Outer border */
+  border-radius: 5px; /* Smooth corners */
+  border-spacing: 0; /* Prevent gaps between cells */
+  overflow: hidden; /* Clip the content to respect rounded corners */
+  margin: 30px;
+  border-collapse: separate; /* Needed for rounded corners */
+}
+
+.appointment-table th,
+.appointment-table td {
+  padding: 12px 20px;
+  text-align: center;
+  border: 1px solid #183e9f; /* Inner cell borders */
+}
+
+.appointment-table th {
+  background-color: white;
+  color: #183e9f;
+  font-weight: bold;
+}
+
+.appointment-table td {
+  background-color: #f9f9f9;
+  color: #183e9f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* Remove inner borders where they meet the table's edges */
+.appointment-table tr:first-child th {
+  border-top: none; /* Remove top border for header row */
+}
+
+.appointment-table tr:last-child td {
+  border-bottom: none; /* Remove bottom border for last row */
+}
+
+.appointment-table tr td:first-child,
+.appointment-table tr th:first-child {
+  border-left: none; /* Remove left border for first column */
+}
+
+.appointment-table tr td:last-child,
+.appointment-table tr th:last-child {
+  border-right: none; /* Remove right border for last column */
+}
+
+/* Ensure corner cells align with rounded edges */
+.appointment-table tr:first-child th:first-child {
+  border-top-left-radius: 15px;
+}
+
+.appointment-table tr:first-child th:last-child {
+  border-top-right-radius: 15px;
+}
+
+.appointment-table tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+.appointment-table tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
+
+
+.modal-buttons {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center; /* Center buttons horizontally */
+  gap: 20px; /* Add spacing between buttons (optional) */
+  margin-top: 50px;
+}
+
+.action-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 250px; /* Fixed width */
+  height: 50px; /* Fixed height */
+  font-weight: bold;
+  background-color: #183e9f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #1457d5; /* Slightly lighter shade on hover */
+}
