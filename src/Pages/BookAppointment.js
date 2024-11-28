@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import "../App.css";
 import "../Styles/BookAppointment.css";
 import { AvailableAppointments } from "../Data/AvailableAppointments";
 
 function AppointmentBooking() {
+  const navigate = useNavigate(); 
   const [doctor, setDoctor] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [clickedButton, setClickedButton] = useState(null); // Track clicked button
+  const [tooltipVisible, setTooltipVisible] = useState(false); // Track tooltip visibility
 
   const timeSlots = [
     "9:00",
@@ -60,6 +63,11 @@ function AppointmentBooking() {
     } else {
       setClickedButton(buttonKey); // Select the clicked button
     }
+  };
+
+  // Toggle tooltip visibility
+  const toggleTooltip = () => {
+    setTooltipVisible((prev) => !prev);
   };
 
   // Render the appointment table
@@ -123,16 +131,36 @@ function AppointmentBooking() {
       <div className="legend-container">
         <div className="legend-item">
           <button className="legend-button unavailable">Unavailable</button>
-
         </div>
         <div className="legend-item">
           <button className="legend-button available">Available</button>
-
         </div>
         <div className="legend-item">
           <button className="legend-button selected">Selected ✓</button>
+        </div>
+      </div>
+
+      {/* Tooltip and Book Appointment in the Same Row */}
+      <div className="action-row">
+        <div className="tooltip-container">
+        {tooltipVisible && (
+            <span className="tooltip-text">
+              Please select an available appointment slot to proceed.
+            </span>
+          )}
+          <button className="tooltip-button" onClick={toggleTooltip}>
+            <span>?</span>
+          </button>
 
         </div>
+
+        <button
+          className="book-appointment-button"
+          disabled={!clickedButton} // Disable when no slot is selected
+          onClick={() => navigate('/appointment-details')}
+        >
+          Book appointment
+        </button>
       </div>
     </div>
   );

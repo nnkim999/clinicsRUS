@@ -164,4 +164,57 @@
     font-size: 16px;
     font-weight: bold;
   }
+
+  /*tooltip*/
+/* Action Row: Tooltip and Book Button */
+.action-row {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    gap: 20px; /* Add spacing between the tooltip and the book button */
+    margin-top: 30px; /* Add spacing above the row */
+    justify-content: flex-end; /* Align buttons to the left */
+  }
+  
+  .tooltip-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spacing between tooltip button and text */
+  }
+  .tooltip-button {
+    background-color: white;
+    border: 2px solid #183E9F;
+    border-radius: 50%;
+    color: #183E9F;
+    font-size: 16px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .tooltip-text {
+    color: #555;
+    font-size: 14px;
+    margin-left: 5px; /* Small space between button and text */
+  }
+  
+  .book-appointment-button {
+    background-color: #183E9F;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .book-appointment-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
   
