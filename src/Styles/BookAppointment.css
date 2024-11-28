@@ -1,3 +1,7 @@
+.container{
+  padding: 5%;
+}
+
 .appointment-table {
     display: grid;
     grid-template-columns: 100px repeat(2, 1fr); /* One column for times, two for dates */
@@ -10,7 +14,14 @@
     display: contents;
   }
   
-  .time-column,
+  .time-column{
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+  }
+
   .date-column {
     padding: 10px;
     text-align: center;

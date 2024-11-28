@@ -123,7 +123,7 @@ function AppointmentBooking() {
   };
 
   return (
-    <div>
+    <div className="container">
       {/* Render the table */}
       {renderTable()}
 
