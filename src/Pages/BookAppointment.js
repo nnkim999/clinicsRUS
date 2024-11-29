@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import "../App.css";
 import "../Styles/BookAppointment.css";
 import { AvailableAppointments } from "../Data/AvailableAppointments";
+import FilterComponent from "../Components/FilterComponent";
 
 function AppointmentBooking() {
   const navigate = useNavigate(); 
@@ -123,7 +124,9 @@ function AppointmentBooking() {
   };
 
   return (
-    <div className="container">
+    <><header>
+      <h1>Book An Appointment</h1>
+    </header><><FilterComponent /><div className="container">
       {/* Render the table */}
       {renderTable()}
 
@@ -143,7 +146,7 @@ function AppointmentBooking() {
       {/* Tooltip and Book Appointment in the Same Row */}
       <div className="action-row">
         <div className="tooltip-container">
-        {tooltipVisible && (
+          {tooltipVisible && (
             <span className="tooltip-text">
               Please select an available appointment slot to proceed.
             </span>
@@ -161,8 +164,9 @@ function AppointmentBooking() {
         >
           Book appointment
         </button>
+
       </div>
-    </div>
+    </div></></>
   );
 }
 
