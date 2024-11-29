@@ -1,0 +1,46 @@
+h1 {
+    color:#183E9F;
+    font-weight: bold;
+}
+
+/*header*/
+.header-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.header-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-button {
+    background-color: #183E9F;
+    color: white;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: default;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-button.available {
+    background-color: #183E9F;
+    color: white;
+}
+
+.back-button.selected {
+    background-color: #64EBB6;
+    color: white;
+    position: relative;
+}
+

@@ -1,0 +1,17 @@
+.button {
+    background-color: #183E9F;
+    color: white;
+    padding: 10px; 
+    border: none;
+    border-radius: 3px;
+    margin:10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+.h1 {
+    color:#183E9F;
+    font-weight: bold;
+  }

@@ -13,6 +13,9 @@ function LandingPage() {
         <button onClick={() => navigate('/book-appointment')}>
           Book an appointment
         </button>
+        <button onClick={() => navigate('/manage-appointment')}>
+          Manage Appointments
+        </button>
       </header>
     </div>
   );
