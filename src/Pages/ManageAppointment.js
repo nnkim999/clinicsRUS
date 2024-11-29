@@ -40,31 +40,36 @@ function ManageAppointment() {
           />
         <h1>Manage Appointment</h1>
       </header>
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons
       <div className="ManageAppointment-navigation">
         <button className="ManageAppointment-button" onClick={() => navigate('/my-account')}>
           My Account
         </button>
-      </div>
+      </div> */}
 
       {/* Appointment Section */}
       <div className="ManageAppointment-body">
-        {Appointment1.map((appointment) => (
-          <><div key={appointment.id} className="ManageAppointment-appointment">
-            {/* <h2>Appointment {appointment.id}</h2> */}
-            <p>Doctor: {appointment.Doctor}</p>
-            <p>Concern: {appointment.Concern}</p>
-            <p>Date: {appointment.AppointmentDate.toLocaleDateString()}</p>
-            <p>Time: {appointment.AppointmentTime.toLocaleTimeString()}</p>
-          </div><button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
-              Reschedule
-            </button><button className="cancel-button" onClick={() => navigate('/cancel-appointment')}>
-              Cancel
-            </button></>
-
-        ))}
+        <h2 className='ManageAppointment-title'>Upcoming Appointments</h2>
+        <div className='ManageAppointment-table'>
+          {Appointment1.map((appointment) => (
+            <><div key={appointment.id} className="ManageAppointment-appointment">
+              <p>Doctor: {appointment.Doctor}</p>
+              <p>Concern: {appointment.Concern}</p>
+              <p>Date: {appointment.AppointmentDate.toLocaleDateString()}</p>
+              <p>Time: {appointment.AppointmentTime.toLocaleTimeString()}</p>
+              <div className="ManageAppointment-buttons">
+                <button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
+                    Reschedule
+                </button>
+                <button className="cancel-button" onClick={() => navigate('/cancel-appointment')}>
+                    Cancel
+                </button>
+              </div>
+            </div>
+            </>))}
       </div>
     </div>
+  </div>
   );
 }
 
