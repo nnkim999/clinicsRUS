@@ -17,8 +17,8 @@ const FilterComponent = () => {
     ];
 
     const doctorOptions = [
-        { value: 'doctor1', label: 'Dr. John Doe' },
-        { value: 'doctor2', label: 'Dr. Jane Smith' },
+        { value: 'doctor1', label: 'Dr. X' },
+        { value: 'doctor2', label: 'Dr. Y' },
         { value: 'doctor3', label: 'Dr. Bob Brown' },
         { value: 'doctor4', label: 'Dr. Alice Green' },
     ];
