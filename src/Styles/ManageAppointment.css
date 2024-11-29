@@ -1,9 +1,33 @@
+
   /* ManageAppointment container Styling */
 .ManageAppointment-container {
   font-family: Arial, sans-serif;
   padding: 20px;
   text-align: center;
 }
+  /* Header */
+  .ManageAppointment-header {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+      padding: 20px;
+  }
+
+  /* app logo */
+  .ManageAppointment-logo {
+    width: 50px;
+    height: auto;
+  }
+
+ /* Header styles
+ .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+
+
 .reschedule-button {
   background-color: #183E9F;
   color: white;
@@ -47,16 +71,11 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  /* Header styles */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo {
+ 
+  /* .logo {
     width: 50px;
     height: auto;
-  }
+  } */
   
   /* Title */
   .title {
@@ -162,18 +181,9 @@
     background-color: #142c7e;
   } */
 
-/* Header
-.ManageAppointment-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f5f5f5;
-    padding: 1rem;
-}
 
-.ManageAppointment-logo {
-  width: 50px;
-} */
+
+
 
 .ManageAppointment-body {
   padding: 1rem;

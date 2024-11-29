@@ -30,7 +30,7 @@ function ManageAppointment() {
   };
   
   return (
-    <div className="container">
+    <div className="ManageAppointment-container">
       {/* Header */}
       <header className="ManageAppointment-header">
         <img 
@@ -45,24 +45,23 @@ function ManageAppointment() {
         <button className="ManageAppointment-button" onClick={() => navigate('/my-account')}>
           My Account
         </button>
-        <button className=".reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
-          Reschedule
-        </button>
-        <button className=".cancel-button" onClick={() => navigate('/cancel-appointment')}>
-          Cancel
-        </button>
       </div>
 
       {/* Appointment Section */}
       <div className="ManageAppointment-body">
         {Appointment1.map((appointment) => (
-          <div key={appointment.id} className="ManageAppointment-appointment">
-            <h2>Appointment {appointment.id}</h2>
+          <><div key={appointment.id} className="ManageAppointment-appointment">
+            {/* <h2>Appointment {appointment.id}</h2> */}
             <p>Doctor: {appointment.Doctor}</p>
             <p>Concern: {appointment.Concern}</p>
             <p>Date: {appointment.AppointmentDate.toLocaleDateString()}</p>
             <p>Time: {appointment.AppointmentTime.toLocaleTimeString()}</p>
-          </div>
+          </div><button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
+              Reschedule
+            </button><button className="cancel-button" onClick={() => navigate('/cancel-appointment')}>
+              Cancel
+            </button></>
+
         ))}
       </div>
     </div>
