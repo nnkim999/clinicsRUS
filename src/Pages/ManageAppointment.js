@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import {Appointment1} from '../Data/Appointments';
 import "../Styles/ManageAppointment.css";
 import clinicsruslogo2 from "../Assets/ClinicsRUs.png";
 
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../Styles/ManageAppointment.css'; 
-import '../App.css';
+// import '../Styles/ManageAppointment.css'; 
+// import '../App.css';
 
 function ManageAppointment() {
   const navigate = useNavigate(); // Initialize navigate
@@ -31,7 +30,8 @@ function ManageAppointment() {
   };
   
   return (
-    <div className="ManageAppointment-container">
+    <div className="container">
+      {/* Header */}
       <header className="ManageAppointment-header">
         <img 
           src={clinicsruslogo2} 
@@ -40,6 +40,20 @@ function ManageAppointment() {
           />
         <h1>Manage Appointment</h1>
       </header>
+      {/* Navigation Buttons */}
+      <div className="ManageAppointment-navigation">
+        <button className="ManageAppointment-button" onClick={() => navigate('/my-account')}>
+          My Account
+        </button>
+        <button className=".reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
+          Reschedule
+        </button>
+        <button className=".cancel-button" onClick={() => navigate('/cancel-appointment')}>
+          Cancel
+        </button>
+      </div>
+
+      {/* Appointment Section */}
       <div className="ManageAppointment-body">
         {Appointment1.map((appointment) => (
           <div key={appointment.id} className="ManageAppointment-appointment">
@@ -52,21 +66,6 @@ function ManageAppointment() {
         ))}
       </div>
     </div>
-    <><div className="ManageAppointment">
-      <header>
-      <button className="back-button" onClick={() => navigate('/')}>
-          Back
-        </button>
-        <h1>Manage Appointments</h1>
-        <button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
-          Reschedule
-        </button>
-        <button className="cancel-button" onClick={() => navigate('/cancel-appointment')}>
-          Cancel
-        </button>
-      </header>
-    </div></>
-    
   );
 }
 
