@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "../Styles/RescheduleAppointments.css";
 import '../App.css';
 import clinicLogo from'../ClinicsRUs.png';
-import FilterComponent from '../Components/FilterComponent';
+//import FilterComponent from '../Components/FilterComponent';
 import { AvailableAppointments } from "../Data/AvailableAppointments";
 import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
@@ -11,58 +11,43 @@ import Select from 'react-select';
 
 
 function RescheduleAppointment() {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate(); 
   const [doctor, setDoctor] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [clickedButton, setClickedButton] = useState(null); // Track clicked button
   const [tooltipVisible, setTooltipVisible] = useState(false); // Track tooltip visibility
-  const [selectedDoctors, setSelectedDoctors] = useState([]);
+  const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
+  const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
   const [filterValue, setFilterValue] = useState('all');
 
-  const items = [
-    { id: 1, text: 'Item 1 for Filter 1 with Dr. John Doe', filter: 'filter1', date: '2024-11-25', doctors: ['doctor1'] },
-    { id: 2, text: 'Item 2 for Filter 2 with Dr. Jane Smith', filter: 'filter2', date: '2024-11-26', doctors: ['doctor2'] },
-    { id: 3, text: 'Item 3 for Filter 3 with Dr. Bob Brown', filter: 'filter3', date: '2024-11-27', doctors: ['doctor3'] },
-    { id: 4, text: 'Item 4 for Filter 1 with Dr. Alice Green', filter: 'filter1', date: '2024-11-28', doctors: ['doctor4'] },
-    { id: 5, text: 'Item 5 for Filter 2 with Dr. John Doe', filter: 'filter2', date: '2024-11-29', doctors: ['doctor1'] },
-];
-
-const doctorOptions = [
+  const doctorOptions = [
     { value: 'doctor1', label: 'Dr. X' },
     { value: 'doctor2', label: 'Dr. Y' },
     { value: 'doctor3', label: 'Dr. Bob Brown' },
     { value: 'doctor4', label: 'Dr. Alice Green' },
-];
+  ];
 
-const handleDoctorChange = (selectedOptions) => {
+  const handleDoctorChange = (selectedOptions) => {
     setSelectedDoctors(selectedOptions ? selectedOptions.map(option => option.value) : []);
-};
+  };
 
-const handleFilterChange = (event) => {
-    setFilterValue(event.target.value);
-};
-
-const handleDateChange = (event) => {
-    const { name, value } = event.target;
-    if (name === 'fromDate') setDateFrom(value);
-    if (name === 'toDate') setDateTo(value);
-};
-
-const handleReset = () => {
+  const resetFilters = () => {
     setFilterValue('all');
-    setDateFrom('');
-    setDateTo('');
+    setDoctor("");
+    setDateFrom("");
+    setDateTo("");
     setSelectedDoctors([]);
-};
+  };
 
-const filteredItems = items.filter(item => {
-    const isFilterMatch = filterValue === 'all' || item.filter === filterValue;
-    const isDateMatch = (!dateFrom || item.date >= dateFrom) && (!dateTo || item.date <= dateTo);
-    const isDoctorMatch = selectedDoctors.length === 0 || selectedDoctors.some(doctor => item.doctors.includes(doctor));
+  const applyFilters = () => {
+    alert(`Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`);
+  };
 
-    return isFilterMatch && isDateMatch && isDoctorMatch;
-});
+  const toggleFilterVisibility = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+
 
   const timeSlots = [
     "9:00",
@@ -177,59 +162,30 @@ const filteredItems = items.filter(item => {
 
   return (
     <><header>
-      <div> 
-        <div className="header-container">
-          <div className="header-item">
-            <button className="back-button" onClick={() => navigate('/manage-appointment')} >
-              Back
-            </button>
-          </div>
-          <div className="header-item">
-            <div style={{ height: '20vh' }}>
-              {/* Other page content */}
-              <img
-                  src="../ClinicsRUs.png" // Replace with the path to your image
-                  alt="Top Right Logo"
-                  style={{
-                      position: 'absolute',
-                      top: '10px',
-                      right: '10px',
-                      width: '100px',  // Adjust size
-                      height: 'auto',
-                  }}
-              />
-            </div>
-          </div>
-        </div>
-
+      
+    </header><><div className="container">
+      <div className="header">
+        <button className="main-button">Main</button>
+        <img
+          src="/logo.png" // Replace with the actual logo path
+          alt="ClinicsRUs Logo"
+          className="logo"
+        />
       </div>
-      <h1>Reschedule Appointment</h1>
-
-      <h3>CurrentAppointment:</h3>
-
-    </header>
-    <>
-    <div>
-            <Dropdown drop="down-centered">
-                <Dropdown.Toggle variant="primary" style={{
-                                        backgroundColor: '#183E9F',
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '5px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '16px',
-                                        fontWeight: 'bold',
-                                        transition: 'background-color 0.3s ease'
-                                    }}>
-                    Filters
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu style={{ padding: '20px' }}>
-                    <Form>
-                        <Form.Group controlId="doctor-selector">
-                            <Form.Label>Select Doctors:</Form.Label>
-                            <Select
+      <h1 style={{color: '#183E9F',fontWeight: 'bold' }}>Reschedule an Appointment</h1>
+      <h3 >Current Appointment:</h3>
+      <div className="filter-container">
+        <div className="filter-header">
+          <span>Filter</span>
+          <button className="collapse-button" onClick={toggleFilterVisibility}>
+            {isFilterVisible ? "\u25B2" : "\u25BC"} {/* ▲ for open, ▼ for collapsed */}
+          </button>
+        </div>
+        {isFilterVisible && ( // Conditionally render filter content
+          <div className="filter-content">
+            <div className="filter-item">
+              <label>Doctor:</label>
+              <Select
                                 isMulti
                                 options={doctorOptions}
                                 value={doctorOptions.filter(option => selectedDoctors.includes(option.value))}
@@ -237,84 +193,37 @@ const filteredItems = items.filter(item => {
                                 placeholder="Select doctors"
                                 isSearchable
                             />
-                        </Form.Group>
-
-                        <Form.Group controlId="from-date">
-                            <Form.Label>From Date:</Form.Label>
-                            <Form.Control
-                                type="date"
-                                name="fromDate"
-                                value={dateFrom}
-                                onChange={handleDateChange}
-                            />
-                        </Form.Group>
-
-                        <Form.Group controlId="to-date">
-                            <Form.Label>To Date:</Form.Label>
-                            <Form.Control
-                                type="date"
-                                name="toDate"
-                                value={dateTo}
-                                onChange={handleDateChange}
-                            />
-                        </Form.Group>
-
-                        
-
-                        <Row>
-                            <Col>
-                                <Button 
-                                    variant="secondary" 
-                                    onClick={handleReset} 
-                                    style={{
-                                        backgroundColor: '#183E9F',
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '5px',
-                                        marginTop: '20px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '16px',
-                                        fontWeight: 'bold',
-                                        transition: 'background-color 0.3s ease'
-                                    }}
-                                >
-                                    Reset
-                                </Button>
-                            </Col>
-                            <Col>
-                                <Button 
-                                    variant="primary" 
-                                    onClick={() => {}} 
-                                    style={{
-                                        backgroundColor: '#183E9F',
-                                        color: 'white',
-                                        border: 'none',
-                                        padding: '5px',
-                                        marginTop: '20px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '16px',
-                                        fontWeight: 'bold',
-                                        transition: 'background-color 0.3s ease'
-                                    }}
-                                >
-                                    Apply Filters
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Dropdown.Menu>
-            </Dropdown>
-
-            {/* <div id="content">
-                {filteredItems.map(item => (
-                    <div key={item.id} className="filterable-item">
-                        {item.text}
-                    </div>
-                ))}
-            </div> */}
-        </div>
+            </div>
+            <div className="filter-item">
+              <label>Date From:</label>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+                className="input-field"
+              />
+            </div>
+            <div className="filter-item">
+              <label>Date To:</label>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+                className="input-field"
+              />
+            </div>
+            <div className="filter-buttons">
+              <button className="reset-button" onClick={resetFilters}>
+                Reset
+              </button>
+              <button className="filter-button" onClick={applyFilters}>
+                Filter
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
     <div className="container">
       {/* Render the table */}
       {renderTable()}
