@@ -1,0 +1,93 @@
+/* Container Styling */
+.appointment-details-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 100px;
+  }
+  
+  .back-button {
+    background-color: #183e9f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  /* Main Title */
+  h1 {
+    color: #183e9f;
+    font-size: 24px;
+    margin-bottom: 60px;
+  }
+  
+  /* Appointment Card */
+  .appointment-card {
+    border: 1px solid #183e9f;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .appointment-card h2 {
+    color: #53565f;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .appointment-card p {
+    margin: 20px 0;
+    font-size: 16px;
+    color: #183e9f;
+  }
+  
+  /* Concern Row */
+  .concern-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    color: #183e9f;
+  }
+  
+  .dropdown {
+    border: 1px solid #183e9f;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    color: #183e9f;
+  }
+  
+  .confirm-button-appointment {
+    background-color: #2d6cdf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 16px;
+    position: fixed; /* Fix the button position on the screen */
+    bottom: 20px; /* Distance from the bottom edge of the screen */
+    right: 20px; /* Distance from the right edge of the screen */
+    cursor: pointer;
+    z-index: 10; /* Ensure it appears on top of other elements */
+  }
+  
+  .confirm-button-appointment:hover {
+    background-color: #1a4a9e;
+  }
+  
