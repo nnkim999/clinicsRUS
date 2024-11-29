@@ -16,12 +16,12 @@
 //         { id: 5, text: 'Item 5 for Filter 2 with Dr. John Doe', filter: 'filter2', date: '2024-11-29', doctors: ['doctor1'] },
 //     ];
 
-//     const doctorOptions = [
-//         { value: 'doctor1', label: 'Dr. John Doe' },
-//         { value: 'doctor2', label: 'Dr. Jane Smith' },
-//         { value: 'doctor3', label: 'Dr. Bob Brown' },
-//         { value: 'doctor4', label: 'Dr. Alice Green' },
-//     ];
+    const doctorOptions = [
+        { value: 'doctor1', label: 'Dr. X' },
+        { value: 'doctor2', label: 'Dr. Y' },
+        { value: 'doctor3', label: 'Dr. Bob Brown' },
+        { value: 'doctor4', label: 'Dr. Alice Green' },
+    ];
 
 //     const handleDoctorChange = (selectedOptions) => {
 //         setSelectedDoctors(selectedOptions ? selectedOptions.map(option => option.value) : []);

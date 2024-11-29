@@ -4,6 +4,8 @@ import "../App.css";
 import "../Styles/BookAppointment.css";
 import { AvailableAppointments } from "../Data/AvailableAppointments";
 import FilterComponent from "../Components/FilterComponent";
+import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
+import Select from 'react-select';
 
 function AppointmentBooking() {
   const navigate = useNavigate(); 
@@ -13,11 +15,26 @@ function AppointmentBooking() {
   const [clickedButton, setClickedButton] = useState(null); // Track clicked button
   const [tooltipVisible, setTooltipVisible] = useState(false); // Track tooltip visibility
   const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
+  const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
+  const [filterValue, setFilterValue] = useState('all');
+
+  const doctorOptions = [
+    { value: 'doctor1', label: 'Dr. X' },
+    { value: 'doctor2', label: 'Dr. Y' },
+    { value: 'doctor3', label: 'Dr. Bob Brown' },
+    { value: 'doctor4', label: 'Dr. Alice Green' },
+  ];
+
+  const handleDoctorChange = (selectedOptions) => {
+    setSelectedDoctors(selectedOptions ? selectedOptions.map(option => option.value) : []);
+  };
 
   const resetFilters = () => {
+    setFilterValue('all');
     setDoctor("");
     setDateFrom("");
     setDateTo("");
+    setSelectedDoctors([]);
   };
 
   const applyFilters = () => {
@@ -163,16 +180,14 @@ function AppointmentBooking() {
           <div className="filter-content">
             <div className="filter-item">
               <label>Doctor:</label>
-              <select
-                value={doctor}
-                onChange={(e) => setDoctor(e.target.value)}
-                className="input-field"
-              >
-                <option value="">Select</option>
-                <option value="Dr. Smith">Dr. Smith</option>
-                <option value="Dr. Johnson">Dr. Johnson</option>
-                <option value="Dr. Lee">Dr. Lee</option>
-              </select>
+              <Select
+                                isMulti
+                                options={doctorOptions}
+                                value={doctorOptions.filter(option => selectedDoctors.includes(option.value))}
+                                onChange={handleDoctorChange}
+                                placeholder="Select doctors"
+                                isSearchable
+                            />
             </div>
             <div className="filter-item">
               <label>Date From:</label>
