@@ -28,7 +28,7 @@ function ManageAppointment() {
     <div className="iphone-manage">
       <div className="div">
         <div className="overlap">
-          <img className="vector" alt="Vector" src={vector1} />
+          {/* <img className="vector" alt="Vector" src={vector1} /> */}
 
           <div className="rectangle" />
 
@@ -38,14 +38,14 @@ function ManageAppointment() {
 
           <div className="text-wrapper-2">Contact Us</div>
 
-          <img className="vector" alt="Vector" src={vector2} />
+          {/* <img className="vector" alt="Vector" src={vector2} /> */}
 
           <div className="text-wrapper-3">My Account</div>
         </div>
 
         <div className="overlap-group">
           <div className="bar">
-            <img className="right-side" alt="Right side" src={image} />
+            {/* <img className="right-side" alt="Right side" src={image} /> */}
 
             <div className="left-side">
               <div className="time">
@@ -61,7 +61,7 @@ function ManageAppointment() {
           />
 
           <div className="bar">
-            <img className="right-side" alt="Right side" src={rightSide} />
+            {/* <img className="right-side" alt="Right side" src={rightSide} /> */}
 
             <div className="left-side">
               <div className="time">
@@ -118,7 +118,7 @@ function ManageAppointment() {
 
           <div className="text-wrapper-17">Reschedule</div>
 
-          <img className="line" alt="Line" src={line27} />
+          {/* <img className="line" alt="Line" src={line27} /> */}
 
           <div className="text-wrapper-18">8:00 AM</div>
 
