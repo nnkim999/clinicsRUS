@@ -90,4 +90,15 @@
   .confirm-button-appointment:hover {
     background-color: #1a4a9e;
   }
+
+  .custom-concern-input {
+    margin-top: 0px;
+    padding: 7px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50%;
+    max-width: 300px;
+  }
+  
   
