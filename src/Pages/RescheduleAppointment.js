@@ -130,32 +130,35 @@ function RescheduleAppointment() {
   return (
     <><header>
       <div> 
-        <div className="header-logo-container">
-          <div className="header-button">
-            <button className="main-button" onClick={() => navigate('/manage-appointment')} >
-          Main
-        </button>
+        <div className="header-container">
+          <div className="header-item">
+            <button className="back-button" onClick={() => navigate('/manage-appointment')} >
+              Back
+            </button>
           </div>
-          <div className="header-logo">
-          <div style={{ position: 'relative', height: '20vh' }}>
-            {/* Other page content */}
-            <img
-                src="../ClinicsRUs.png" // Replace with the path to your image
-                alt="Top Right Logo"
-                style={{
-                    position: 'absolute',
-                    top: '10px',
-                    right: '10px',
-                    width: '100px',  // Adjust size
-                    height: 'auto',
-                }}
-            />
+          <div className="header-item">
+            <div style={{ height: '20vh' }}>
+              {/* Other page content */}
+              <img
+                  src="../ClinicsRUs.png" // Replace with the path to your image
+                  alt="Top Right Logo"
+                  style={{
+                      position: 'absolute',
+                      top: '10px',
+                      right: '10px',
+                      width: '100px',  // Adjust size
+                      height: 'auto',
+                  }}
+              />
+            </div>
+          </div>
         </div>
 
-          </div>
-        </div>
       </div>
       <h1>Reschedule Appointment</h1>
+
+      <h3>CurrentAppointment:</h3>
+      
     </header>
     <><FilterComponent />
     <div className="container">

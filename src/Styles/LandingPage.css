@@ -1,4 +1,4 @@
-button {
+.button {
     background-color: #183E9F;
     color: white;
     padding: 10px; 
@@ -10,3 +10,8 @@ button {
     font-weight: bold;
 
 }
+
+.h1 {
+    color:#183E9F;
+    font-weight: bold;
+  }

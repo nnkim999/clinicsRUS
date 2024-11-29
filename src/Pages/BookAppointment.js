@@ -12,6 +12,22 @@ function AppointmentBooking() {
   const [dateTo, setDateTo] = useState("");
   const [clickedButton, setClickedButton] = useState(null); // Track clicked button
   const [tooltipVisible, setTooltipVisible] = useState(false); // Track tooltip visibility
+  const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
+
+  const resetFilters = () => {
+    setDoctor("");
+    setDateFrom("");
+    setDateTo("");
+  };
+
+  const applyFilters = () => {
+    alert(`Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`);
+  };
+
+  const toggleFilterVisibility = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+
 
   const timeSlots = [
     "9:00",
@@ -125,8 +141,70 @@ function AppointmentBooking() {
 
   return (
     <><header>
-      <h1>Book An Appointment</h1>
-    </header><><FilterComponent /><div className="container">
+      
+    </header><><div className="container">
+      <div className="header">
+        <button className="main-button" onClick={navigate('/manage-appointment')}>Main</button>
+        <img
+          src="../ClinicsRUs.png" // Replace with the actual logo path
+          alt="ClinicsRUs Logo"
+          className="logo"
+        />
+      </div>
+      <h1 className="title">Appointment booking</h1>
+      <div className="filter-container">
+        <div className="filter-header">
+          <span>Filter</span>
+          <button className="collapse-button" onClick={toggleFilterVisibility}>
+            {isFilterVisible ? "\u25B2" : "\u25BC"} {/* ▲ for open, ▼ for collapsed */}
+          </button>
+        </div>
+        {isFilterVisible && ( // Conditionally render filter content
+          <div className="filter-content">
+            <div className="filter-item">
+              <label>Doctor:</label>
+              <select
+                value={doctor}
+                onChange={(e) => setDoctor(e.target.value)}
+                className="input-field"
+              >
+                <option value="">Select</option>
+                <option value="Dr. Smith">Dr. Smith</option>
+                <option value="Dr. Johnson">Dr. Johnson</option>
+                <option value="Dr. Lee">Dr. Lee</option>
+              </select>
+            </div>
+            <div className="filter-item">
+              <label>Date From:</label>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+                className="input-field"
+              />
+            </div>
+            <div className="filter-item">
+              <label>Date To:</label>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+                className="input-field"
+              />
+            </div>
+            <div className="filter-buttons">
+              <button className="reset-button" onClick={resetFilters}>
+                Reset
+              </button>
+              <button className="filter-button" onClick={applyFilters}>
+                Filter
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+    <div className="container">
       {/* Render the table */}
       {renderTable()}
 
