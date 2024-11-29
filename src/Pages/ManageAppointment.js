@@ -10,10 +10,10 @@ function ManageAppointment() {
     <div className="ManageAppointment">
       <header>
         <h1>Manage Appointments</h1>
-        <button class="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
+        <button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
           Reschedule
         </button>
-        <button class="cancel-button"onClick={() => navigate('/cancel-appointment')}>
+        <button className="cancel-button"onClick={() => navigate('/cancel-appointment')}>
           Cancel
         </button>
       </header>

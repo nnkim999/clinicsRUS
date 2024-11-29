@@ -1,21 +1,32 @@
 .reschedule-button {
     background-color: #183E9F;
     color: white;
-    padding: 10px; 
+    padding: 15px;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+    margin: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   .cancel-button {
     background-color: #d64d4d;
     color: white;
-    padding: 10px; 
+    padding: 15px;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .h1 {
+    color:#183E9F;
     font-weight: bold;
   }
