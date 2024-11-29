@@ -10,7 +10,7 @@ function AppointmentDetails() {
     return (
       <div className="appointment-details-container">
         <header className="header">
-          <button className="back-button">Back</button>
+          <button className="back-button" onClick={() => navigate('/book-appointment')}>Back</button>
           <img
             src="/logo.png" // Path to your logo in the public folder
             alt="Clinic Logo"
