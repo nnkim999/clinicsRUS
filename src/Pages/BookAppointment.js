@@ -144,9 +144,9 @@ function AppointmentBooking() {
       
     </header><><div className="container">
       <div className="header">
-        <button className="main-button" onClick={navigate('/manage-appointment')}>Main</button>
+        <button className="main-button">Main</button>
         <img
-          src="../ClinicsRUs.png" // Replace with the actual logo path
+          src="/logo.png" // Replace with the actual logo path
           alt="ClinicsRUs Logo"
           className="logo"
         />
