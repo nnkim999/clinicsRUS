@@ -1,11 +1,16 @@
 import React from 'react';
 import '../Styles/AppointmentConfirmation.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const AppointmentConfirmation = () => {
+
+
+function AppointmentFinalConfirmation() {
+  const navigate = useNavigate(); 
+
   return (
     <div className="appointment-container">
       <header className="header">
-        <button className="main-button">Main</button>
+        <button className="main-button" onClick={() => navigate('/')}>Main</button>
         <img
           src="/logo.png" // Path to your logo in the public folder
           alt="Clinic Logo"
@@ -41,12 +46,14 @@ const AppointmentConfirmation = () => {
           </table>
         </div>
         <div className="button-group">
-          <button className="action-button">Book more appointments</button>
-          <button className="action-button">Manage appointments</button>
+          <button className="action-button" onClick={() => navigate('/book-appointment')}>Book more appointments</button>
+          <button className="action-button" onClick={() => navigate('/manage-appointment')}>Manage appointments</button>
         </div>
       </main>
     </div>
   );
-};
 
-export default AppointmentConfirmation;
+
+}
+
+export default AppointmentFinalConfirmation;
