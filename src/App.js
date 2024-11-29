@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Im
 import LandingPage from './Pages/LandingPage';
 import BookAppointment from './Pages/BookAppointment';
 import AppointmentDetails from './Pages/AppointmentDetails';
-import RescheduleAppointment from './Pages/RescheduleAppointment';
 import ManageAppointment from './Pages/ManageAppointment';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import RescheduleAppointment from './Pages/RescheduleAppointment';
+// import ManageAppointment from './Pages/ManageAppointment';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

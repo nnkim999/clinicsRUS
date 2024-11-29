@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../Styles/ManageAppointment.css'; 
-import '../App.css';
+import {Appointment1} from '../Data/Appointments';
+import "../Styles/ManageAppointment.css";
+import clinicsruslogo2 from "../Assets/ClinicsRUs.png";
+
+// import '../Styles/ManageAppointment.css'; 
+// import '../App.css';
 
 function ManageAppointment() {
   const navigate = useNavigate(); // Initialize navigate
@@ -26,21 +30,41 @@ function ManageAppointment() {
   };
   
   return (
-    <><div className="ManageAppointment">
-      <header>
-      <button className="back-button" onClick={() => navigate('/')}>
-          Back
-        </button>
-        <h1>Manage Appointments</h1>
-        <button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
-          Reschedule
-        </button>
-        <button className="cancel-button" onClick={() => navigate('/cancel-appointment')}>
-          Cancel
-        </button>
+    <div className="ManageAppointment-container">
+      {/* Header */}
+      <header className="ManageAppointment-header">
+        <img 
+          src={clinicsruslogo2} 
+          className="ManageAppointment-logo" 
+          alt="Clinic R Us Logo" 
+          />
+        <h1>Manage Appointment</h1>
       </header>
-    </div></>
-    
+      {/* Navigation Buttons */}
+      <div className="ManageAppointment-navigation">
+        <button className="ManageAppointment-button" onClick={() => navigate('/my-account')}>
+          My Account
+        </button>
+      </div>
+
+      {/* Appointment Section */}
+      <div className="ManageAppointment-body">
+        {Appointment1.map((appointment) => (
+          <><div key={appointment.id} className="ManageAppointment-appointment">
+            {/* <h2>Appointment {appointment.id}</h2> */}
+            <p>Doctor: {appointment.Doctor}</p>
+            <p>Concern: {appointment.Concern}</p>
+            <p>Date: {appointment.AppointmentDate.toLocaleDateString()}</p>
+            <p>Time: {appointment.AppointmentTime.toLocaleTimeString()}</p>
+          </div><button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
+              Reschedule
+            </button><button className="cancel-button" onClick={() => navigate('/cancel-appointment')}>
+              Cancel
+            </button></>
+
+        ))}
+      </div>
+    </div>
   );
 }
 
