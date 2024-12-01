@@ -98,16 +98,19 @@
     padding: 10px 40px;
     font-size: 16px;
     cursor: pointer;
+    font-weight: bold;
   }
   
   .cancel-button {
     background-color: #183e9f;
     color: white;
+    font-weight: bold;
   }
   
   .confirm-button {
     background-color: #183e9f;
     color: white;
+    font-weight: bold;
   }
   
   .cancel-button:hover {

@@ -87,6 +87,7 @@
     right: 20px; /* Distance from the right edge of the screen */
     cursor: pointer;
     z-index: 10; /* Ensure it appears on top of other elements */
+    font-weight: bold;
   }
   
   .confirm-button-appointment:hover {
