@@ -31,7 +31,7 @@
   h1 {
     color: #183e9f;
     font-size: 24px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
   
   /* Appointment Card */
@@ -42,12 +42,13 @@
     margin: 0 auto;
     max-width: 400px;
     text-align: left;
+    margin-top: 50px;
   }
   
   .appointment-card h2 {
     color: #53565f;
     font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   
   .appointment-card p {
@@ -74,7 +75,7 @@
   }
   
   .confirm-button-appointment {
-    background-color: #2d6cdf;
+    background-color: #183e9f;
     color: white;
     border: none;
     border-radius: 5px;
