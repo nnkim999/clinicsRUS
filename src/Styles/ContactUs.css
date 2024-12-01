@@ -1,5 +1,5 @@
 /* General container styling */
-.landing-page-container {
+.contact-us-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,29 +10,29 @@
     min-height: 100vh;
   }
   
-  /* Header styling */
-  .landing-header {
+  /* Header section */
+  .contact-us-header {
+    width: 100%;
     text-align: center;
     margin-bottom: 20px;
   }
   
-  .landing-logo {
+  .contact-us-logo {
     width: 350px;
     height: auto;
-    margin-bottom: -50px;
   }
   
-  .landing-description {
+  .contact-us-description {
     font-size: 22px;
     color: #333;
   }
   
   /* Navigation styling */
-  .landing-nav {
+  .contact-us-nav {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
   }
   
   .nav-button {
@@ -55,58 +55,40 @@
     background-color: #e6f0ff;
   }
   
-  /* Login form styling */
-  .landing-main {
+  /* Main content styling */
+  .contact-us-main {
     width: 100%;
     max-width: 400px;
   }
   
-  .login-title {
+  .contact-us-title {
     font-size: 18px;
     font-weight: bold;
     color: #183e9f;
-    margin-bottom: 20px;
-    margin-top: 50px;
+    margin-bottom: 70px;
   }
   
-  .login-form {
+  .contact-us-details {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
   
-  .login-input {
-    padding: 10px;
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
   }
   
-  .forgot-password {
-    font-size: 12px;
-    color: #006699;
-    text-decoration: none;
-    text-align: right;
+  .contact-icon {
+    font-size: 20px;
+    color: #183e9f;
   }
   
-  .forgot-password:hover {
-    text-decoration: underline;
+  .contact-info {
+    font-size: 14px;
+    color: #183e9f;
+    text-align: left;
   }
-  
-  .login-button {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #183e9f;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .login-button:hover {
-    background-color: #0055aa;
-  }
-  
   
