@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import "../Styles/AppointmentDetails.css";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import ConfirmBookingModal from "./ConfirmBookingModal";
 
 const AppointmentDetails = () => {
+  const navigate = useNavigate();
   const [concern, setConcern] = useState("General");
   const [customConcern, setCustomConcern] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
 
   const handleConcernChange = (event) => {
     setConcern(event.target.value);
@@ -11,11 +15,33 @@ const AppointmentDetails = () => {
       setCustomConcern(""); // Reset custom concern when not "Other"
     }
   };
+  const handleConfirmClick = () => {
+    setIsModalOpen(true); // Open the modal
+  };
+
+  const handleCancelModal = () => {
+    setIsModalOpen(false); // Close the modal
+  };
+  
+
+  const handleConfirmModal = () => {
+    // Logic to confirm the appointment (e.g., API call, redirect, etc.)
+    console.log("Appointment confirmed!");
+    setIsModalOpen(false); // Close the modal
+    navigate("/final-confirmation");
+  };
+
+  const appointmentDetails = {
+    date: "2",
+    month: "October",
+    time: "2:00pm - 3:00pm",
+    doctor: "Dr. K",
+  };
 
   return (
     <div className="appointment-details-container">
       <header className="header">
-        <button className="back-button">Back</button>
+        <button className="back-button" onClick={() => navigate('/book-appointment')}>Back</button>
         <img
           src="/logo.png" // Path to your logo in the public folder
           alt="Clinic Logo"
@@ -43,10 +69,18 @@ const AppointmentDetails = () => {
               onChange={handleConcernChange}
             >
               <option value="General">General</option>
-              <option value="Pediatrics">Pediatrics</option>
-              <option value="Dermatology">Dermatology</option>
-              <option value="Cardiology">Cardiology</option>
+              <option value="Skin Irritation">Skin Irritation</option>
+              <option value="Cold/Flu">Cold/Flu</option>
+              <option value="Headache/Migraine">Headache/Migraine</option>
+              <option value="Fever">Fever</option>
+              <option value="Stomach Pain">Stomach Pain</option>
+              <option value="Cough">Cough</option>
+              <option value="Injury">Injury</option>
+              <option value="Allergies">Allergies</option>
+              <option value="Fatigue">Fatigue</option>
+              <option value="Chronic Pain">Chronic Pain</option>
               <option value="Other">Other</option>
+
             </select>
             {concern === "Other" && (
               <input
@@ -59,8 +93,18 @@ const AppointmentDetails = () => {
             )}
           </div>
         </div>
-        <button className="confirm-button-appointment">Confirm Appointment</button>
+        <button className="confirm-button-appointment" onClick={handleConfirmClick}>
+          Confirm Appointment
+        </button>
       </main>
+        {/* Render Modal */}
+        {isModalOpen && (
+        <ConfirmBookingModal
+          onCancel={handleCancelModal}
+          onConfirm={handleConfirmModal}
+          appointment={appointmentDetails}
+        />
+      )}
     </div>
   );
 };
