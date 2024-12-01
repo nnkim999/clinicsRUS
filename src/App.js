@@ -5,8 +5,7 @@ import BookAppointment from './Pages/BookAppointment';
 import AppointmentDetails from './Pages/AppointmentDetails';
 import ManageAppointment from './Pages/ManageAppointment';
 import RescheduleAppointment from './Pages/RescheduleAppointment';
-// import ManageAppointment from './Pages/ManageAppointment';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

@@ -3,18 +3,51 @@ import { useNavigate } from 'react-router-dom';
 import "../Styles/RescheduleAppointments.css";
 import '../App.css';
 import clinicLogo from'../ClinicsRUs.png';
-import FilterComponent from '../Components/FilterComponent';
+//import FilterComponent from '../Components/FilterComponent';
 import { AvailableAppointments } from "../Data/AvailableAppointments";
+import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
+import Select from 'react-select';
 
 
 
 function RescheduleAppointment() {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate(); 
   const [doctor, setDoctor] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [clickedButton, setClickedButton] = useState(null); // Track clicked button
   const [tooltipVisible, setTooltipVisible] = useState(false); // Track tooltip visibility
+  const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
+  const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
+  const [filterValue, setFilterValue] = useState('all');
+
+  const doctorOptions = [
+    { value: 'doctor1', label: 'Dr. X' },
+    { value: 'doctor2', label: 'Dr. Y' },
+    { value: 'doctor3', label: 'Dr. Bob Brown' },
+    { value: 'doctor4', label: 'Dr. Alice Green' },
+  ];
+
+  const handleDoctorChange = (selectedOptions) => {
+    setSelectedDoctors(selectedOptions ? selectedOptions.map(option => option.value) : []);
+  };
+
+  const resetFilters = () => {
+    setFilterValue('all');
+    setDoctor("");
+    setDateFrom("");
+    setDateTo("");
+    setSelectedDoctors([]);
+  };
+
+  const applyFilters = () => {
+    alert(`Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`);
+  };
+
+  const toggleFilterVisibility = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+
 
   const timeSlots = [
     "9:00",
@@ -129,38 +162,68 @@ function RescheduleAppointment() {
 
   return (
     <><header>
-      <div> 
-        <div className="header-container">
-          <div className="header-item">
-            <button className="back-button" onClick={() => navigate('/manage-appointment')} >
-              Back
-            </button>
-          </div>
-          <div className="header-item">
-            <div style={{ height: '20vh' }}>
-              {/* Other page content */}
-              <img
-                  src="../ClinicsRUs.png" // Replace with the path to your image
-                  alt="Top Right Logo"
-                  style={{
-                      position: 'absolute',
-                      top: '10px',
-                      right: '10px',
-                      width: '100px',  // Adjust size
-                      height: 'auto',
-                  }}
+      
+    </header><><div className="container">
+      <div className="header">
+        <button className="main-button">Main</button>
+        <img
+          src="/logo.png" // Replace with the actual logo path
+          alt="ClinicsRUs Logo"
+          className="logo"
+        />
+      </div>
+      <h1 style={{color: '#183E9F',fontWeight: 'bold' }}>Reschedule an Appointment</h1>
+      <h3 >Current Appointment:</h3>
+      <div className="filter-container">
+        <div className="filter-header">
+          <span>Filter</span>
+          <button className="collapse-button" onClick={toggleFilterVisibility}>
+            {isFilterVisible ? "\u25B2" : "\u25BC"} {/* ▲ for open, ▼ for collapsed */}
+          </button>
+        </div>
+        {isFilterVisible && ( // Conditionally render filter content
+          <div className="filter-content">
+            <div className="filter-item">
+              <label>Doctor:</label>
+              <Select
+                                isMulti
+                                options={doctorOptions}
+                                value={doctorOptions.filter(option => selectedDoctors.includes(option.value))}
+                                onChange={handleDoctorChange}
+                                placeholder="Select doctors"
+                                isSearchable
+                            />
+            </div>
+            <div className="filter-item">
+              <label>Date From:</label>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+                className="input-field"
               />
             </div>
+            <div className="filter-item">
+              <label>Date To:</label>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+                className="input-field"
+              />
+            </div>
+            <div className="filter-buttons">
+              <button className="reset-button" onClick={resetFilters}>
+                Reset
+              </button>
+              <button className="filter-button" onClick={applyFilters}>
+                Filter
+              </button>
+            </div>
           </div>
-        </div>
-
+        )}
       </div>
-      <h1>Reschedule Appointment</h1>
-
-      <h3>CurrentAppointment:</h3>
-      
-    </header>
-    <><FilterComponent />
+    </div>
     <div className="container">
       {/* Render the table */}
       {renderTable()}
