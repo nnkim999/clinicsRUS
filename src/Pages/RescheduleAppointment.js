@@ -258,7 +258,7 @@ function RescheduleAppointment() {
         <button
           className="book-appointment-button"
           disabled={!clickedButton} // Disable when no slot is selected
-          onClick={() => navigate('/appointment-details')}
+          onClick={() => navigate('/reschedule-appointment-details')}
         >
           Book appointment
         </button>

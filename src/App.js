@@ -8,6 +8,7 @@ import RescheduleAppointment from './Pages/RescheduleAppointment';
 import ContactUs from './Pages/ContactUs';
 import MyAccount from './Pages/MyAccount';
 import AppointmentFinalConfirmation from './Pages/AppointmentFinalConfirmation'
+import AppointmentRescheduleDetails from './Pages/AppointmentRescheduleDetails'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/final-confirmation" element={<AppointmentFinalConfirmation />} />
+          <Route path="/reschedule-appointment-details" element={<AppointmentRescheduleDetails />} />
         </Routes>
       </div>
     </Router>

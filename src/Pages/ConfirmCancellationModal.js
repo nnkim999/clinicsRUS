@@ -1,20 +1,20 @@
 import React from 'react';
-import '../Styles/ConfirmCancellationModal.css';
+import styles from "../Styles/ConfirmCancellationModal.module.css";
 
 const ConfirmCancellationModal = ({ onCancel, onConfirm }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className={styles['modal-overlay']}>
+      <div className={styles['modal-content']}>
         <h1>Confirm cancellation</h1>
         <p>
           Are you sure you want to cancel your appointment on October 22nd from
-          9:00 am to 10:00 am with Doctor. Alia?
+          9:00 am to 10:00 am with Doctor Alia?
         </p>
-        <div className="modal-buttons">
-          <button className="modal-button cancel-button" onClick={onCancel}>
+        <div className={styles['modal-buttons']}>
+          <button className={styles['modal-button'] + ' ' + styles['cancel-button']} onClick={onCancel}>
             No
           </button>
-          <button className="modal-button confirm-button" onClick={onConfirm}>
+          <button className={styles['modal-button'] + ' ' + styles['confirm-button']} onClick={onConfirm}>
             Yes
           </button>
         </div>

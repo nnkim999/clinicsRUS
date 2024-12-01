@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/ConfirmReschedulingModal.css';
+import styles from "../Styles/ConfirmReschedulingModal.module.css";
 
 const ConfirmReschedulingModal = ({
   onCancel,
@@ -8,38 +8,38 @@ const ConfirmReschedulingModal = ({
   newAppointment,
 }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <div className="modal-header">
+    <div className={styles['modal-overlay']}>
+      <div className={styles['modal-content']}>
+        <div className={styles['modal-header']}>
           <h1>Confirm Rescheduling</h1>
         </div>
         <p>Former Appointment:</p>
-        <div className="appointment-card">
-          <div className="date-section">
-            <span className="date">{formerAppointment.date}</span>
-            <span className="month">{formerAppointment.month}</span>
+        <div className={styles['appointment-card']}>
+          <div className={styles['date-section']}>
+            <span className={styles['date']}>{formerAppointment.date}</span>
+            <span className={styles['month']}>{formerAppointment.month}</span>
           </div>
-          <div className="details-section">
-            <p className="time">{formerAppointment.time}</p>
-            <p className="doctor">{formerAppointment.doctor}</p>
+          <div className={styles['details-section']}>
+            <p className={styles['time']}>{formerAppointment.time}</p>
+            <p className={styles['doctor']}>{formerAppointment.doctor}</p>
           </div>
         </div>
         <p>New Appointment:</p>
-        <div className="appointment-card">
-          <div className="date-section">
-            <span className="date">{newAppointment.date}</span>
-            <span className="month">{newAppointment.month}</span>
+        <div className={styles['appointment-card']}>
+          <div className={styles['date-section']}>
+            <span className={styles['date']}>{newAppointment.date}</span>
+            <span className={styles['month']}>{newAppointment.month}</span>
           </div>
-          <div className="details-section">
-            <p className="time">{newAppointment.time}</p>
-            <p className="doctor">{newAppointment.doctor}</p>
+          <div className={styles['details-section']}>
+            <p className={styles['time']}>{newAppointment.time}</p>
+            <p className={styles['doctor']}>{newAppointment.doctor}</p>
           </div>
         </div>
-        <div className="modal-buttons">
-          <button className="modal-button cancel-button" onClick={onCancel}>
+        <div className={styles['modal-buttons']}>
+          <button className={`${styles['modal-button']} ${styles['cancel-button']}`} onClick={onCancel}>
             No
           </button>
-          <button className="modal-button confirm-button" onClick={onConfirm}>
+          <button className={`${styles['modal-button']} ${styles['confirm-button']}`} onClick={onConfirm}>
             Yes
           </button>
         </div>
@@ -47,5 +47,6 @@ const ConfirmReschedulingModal = ({
     </div>
   );
 };
+
 
 export default ConfirmReschedulingModal;
