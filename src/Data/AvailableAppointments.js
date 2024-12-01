@@ -7,7 +7,7 @@ export const AvailableAppointments = [
     },
     {
       id: 2,
-      Doctor: "Dr. X",
+      Doctor: "Dr. Y",
       AppointmentDate: new Date("2024-12-04"), 
       AppointmentTime: new Date("2024-12-01T14:00:00"), 
     },

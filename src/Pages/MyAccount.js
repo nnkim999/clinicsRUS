@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/MyAccount.css';
-import ClinicsRUsLogo from '../ClinicsRUs.png'; // Import the logo
+import clinicsruslogo2 from "../Assets/ClinicsRUs.png";// Import the logo
 
 function MyAccount() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function MyAccount() {
         </div>
         <div className="header-center">
           <img
-            src={ClinicsRUsLogo}
+            src={clinicsruslogo2}
             alt="ClinicsRUs Logo"
             className="my-account-logo"
           />
