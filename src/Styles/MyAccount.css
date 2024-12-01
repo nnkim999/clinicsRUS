@@ -1,0 +1,144 @@
+/* General container styling */
+.my-account-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Header styling */
+.my-account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.header-left {
+  flex: 1;
+  text-align: left;
+  margin-top: 200px;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-right {
+  flex: 1;
+  text-align: right;
+  margin-top: 200px;
+}
+
+.booking-application-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #183e9f;
+}
+
+.my-account-logo {
+  width: 200px; /* Logo width as specified */
+  height: auto;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #183e9f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #0055aa;
+}
+
+/* Navigation styling */
+.my-account-nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.nav-button {
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 25px;
+  color: #183e9f;
+  border: 1px solid #183e9f;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-button.active {
+  background-color: #183e9f;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.nav-button:not(.active):hover {
+  background-color: #e6f0ff;
+  font-size: 20px;
+
+}
+
+.nav-button:not(.active) {
+  font-size: 20px;
+}
+
+/* Main content styling */
+.my-account-main {
+  width: 100%;
+  max-width: 400px;
+}
+
+.welcome-text {
+  font-size: 25px;
+  font-weight: bold;
+  color: #183e9f;
+  margin-bottom: 10px;
+  margin-top: 70px;
+}
+
+.instruction-text {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 70px;
+}
+
+.my-account-button {
+  padding: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  background-color: #183e9f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.my-account-button:hover {
+  background-color: #0055aa;
+}
