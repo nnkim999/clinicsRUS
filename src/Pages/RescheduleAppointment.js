@@ -19,6 +19,7 @@ function RescheduleAppointment() {
   const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
   const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
   const [filterValue, setFilterValue] = useState('all');
+  const [selectedSlots, setSelectedSlots] = useState([]); // Maintain a list of selected slots
 
   const doctorOptions = [
     { value: 'doctor1', label: 'Dr. X' },
@@ -93,11 +94,15 @@ function RescheduleAppointment() {
 
   // Handle button click to toggle selection
   const handleButtonClick = (date, time) => {
-    const buttonKey = `${date}-${time}`;
-    if (clickedButton === buttonKey) {
-      setClickedButton(null); // Deselect
+    const slotKey = `${date}-${time}`;
+    
+    // Check if the slot is already selected
+    if (selectedSlots.includes(slotKey)) {
+      // If selected, deselect it by filtering it out from the list
+      setSelectedSlots(selectedSlots.filter((slot) => slot !== slotKey));
     } else {
-      setClickedButton(buttonKey); // Select the clicked button
+      // Otherwise, add it to the selected list
+      setSelectedSlots([...selectedSlots, slotKey]);
     }
   };
 
@@ -130,23 +135,20 @@ function RescheduleAppointment() {
                       key={`${date}-${time}`}
                       className="appointment-cell"
                     >
-                      {status ? (
-                        <button
-                          className={`book-button ${
-                            clickedButton === `${date}-${time}`
-                              ? "clicked"
-                              : ""
-                          }`}
-                          onClick={() => handleButtonClick(date, time)}
-                        >
-                          <div className="button-content">{time}</div>
-                          {status.status === "booked" && (
-                            <div className="doctor-name">
-                              {status.doctor}
-                            </div>
-                          )}
-                        </button>
-                      ) : null}
+                                        {status ? (
+                      <button
+                        className={`book-button ${
+                          selectedSlots.includes(`${date}-${time}`) ? "clicked" : ""
+                        }`}
+                        onClick={() => handleButtonClick(date, time)}
+                      >
+                        <div className="button-content">{time}</div>
+                        {status.status === "booked" && (
+                          <div className="doctor-name">{status.doctor}</div>
+                        )}
+                      </button>
+                    ) : null}
+
                     </div>
                   );
                 })}
@@ -255,11 +257,11 @@ function RescheduleAppointment() {
         </div>
 
         <button
-          className="book-appointment-button"
-          disabled={!clickedButton} // Disable when no slot is selected
-          onClick={() => navigate('/reschedule-appointment-details')}
+        className="book-appointment-button"
+        disabled={selectedSlots.length === 0} // Enable only when there's at least one selection
+        onClick={() => navigate('/appointment-details')}
         >
-          Book appointment
+        Reschedule appointment
         </button>
 
       </div>
