@@ -117,11 +117,27 @@ function AppointmentBooking() {
       <div className="appointment-table">
         <div className="table-header">
           <div className="time-column"></div>
-          {dates.map((date) => (
-            <div key={date} className="date-column">
-              {formatDate(date)}
-            </div>
-          ))}
+          {dates.map((date) => {
+            const hasAppointments = timeSlots.some((time) =>
+              getTimeSlotStatus(date, time)
+            );
+  
+            return (
+              <div
+                key={date}
+                className={`date-column ${
+                  hasAppointments ? "" : "no-appointments"
+                }`}
+              >
+                {formatDate(date)}
+                {!hasAppointments && (
+                  <div className="no-appointments-text">
+                    No appointment available
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
         <div className="table-body">
           {timeSlots.map((time) => (
@@ -130,25 +146,32 @@ function AppointmentBooking() {
                 <div className="time-cell">{time}</div>
                 {dates.map((date) => {
                   const status = getTimeSlotStatus(date, time);
+                  const hasAppointments = timeSlots.some((timeSlot) =>
+                    getTimeSlotStatus(date, timeSlot)
+                  );
+  
                   return (
                     <div
                       key={`${date}-${time}`}
-                      className="appointment-cell"
+                      className={`appointment-cell ${
+                        hasAppointments ? "" : "no-appointments"
+                      }`}
                     >
-                                      {status ? (
-                      <button
-                        className={`book-button ${
-                          selectedSlots.includes(`${date}-${time}`) ? "clicked" : ""
-                        }`}
-                        onClick={() => handleButtonClick(date, time)}
-                      >
-                        <div className="button-content">{time}</div>
-                        {status.status === "booked" && (
-                          <div className="doctor-name">{status.doctor}</div>
-                        )}
-                      </button>
-                    ) : null}
-
+                      {status && (
+                        <button
+                          className={`book-button ${
+                            selectedSlots.includes(`${date}-${time}`)
+                              ? "clicked"
+                              : ""
+                          }`}
+                          onClick={() => handleButtonClick(date, time)}
+                        >
+                          <div className="button-content">{time}</div>
+                          {status.status === "booked" && (
+                            <div className="doctor-name">{status.doctor}</div>
+                          )}
+                        </button>
+                      )}
                     </div>
                   );
                 })}
@@ -159,7 +182,7 @@ function AppointmentBooking() {
       </div>
     );
   };
-
+  
   return (
     <><header>
       
