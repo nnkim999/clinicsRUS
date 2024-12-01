@@ -16,7 +16,7 @@ function App() {
           <Route path="/book-appointment" element={<BookAppointment />} /> {/* Route to BookAppointment */}
           <Route path="/appointment-details" element={<AppointmentDetails />} /> {/* Route to BookAppointment */}
           <Route path="/reschedule-appointment" element={<RescheduleAppointment />} /> {/* Route to RescheduleAppointment */}
-          <Route path="/manage-appointment" element={<ManageAppointment />} /> 
+          <Route path="/manage-appointment" element={<ManageAppointment />} />
         </Routes>
       </div>
     </Router>

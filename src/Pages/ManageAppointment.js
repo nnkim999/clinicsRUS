@@ -1,72 +1,66 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import {Appointment1} from '../Data/Appointments';
+import { Appointment1 } from '../Data/Appointments';
 import "../Styles/ManageAppointment.css";
 import clinicsruslogo2 from "../Assets/ClinicsRUs.png";
 
 function ManageAppointment() {
   const navigate = useNavigate(); // Initialize navigate
 
-  const [doctor, setDoctor] = useState("");
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
-  const [isFilterVisible, setIsFilterVisible] = useState(true);
-
-  const resetFilters = () => {
-    setDoctor("");
-    setDateFrom("");
-    setDateTo("");
-  };
-
-  const applyFilters = () => {
-    alert(`Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`);
-  };
-
-  const toggleFilterVisibility = () => {
-    setIsFilterVisible(!isFilterVisible);
-  };
-  
   return (
     <div className="ManageAppointment-container">
       {/* Header */}
       <header className="ManageAppointment-header">
-        <img 
-          src={clinicsruslogo2} 
-          className="ManageAppointment-logo" 
-          alt="Clinic R Us Logo" 
+        <div className="header-left">
+          <p className="booking-application-text">Booking Application</p>
+        </div>
+        <div className="header-center">
+          <img
+            src={clinicsruslogo2}
+            alt="ClinicsRUs Logo"
+            className="ManageAppointment-logo"
           />
-        <h1>Manage Appointment</h1>
+        </div>
+        <div className="header-right">
+          <button className="logout-button" onClick={() => navigate('/')}>
+            Log Out
+          </button>
+        </div>
       </header>
-      {/* Navigation Buttons
-      <div className="ManageAppointment-navigation">
-        <button className="ManageAppointment-button" onClick={() => navigate('/my-account')}>
+
+      {/* Navigation */}
+      <nav className="ManageAppointment-nav">
+        <button className="nav-button active" onClick={() => navigate('/my-account')}>
           My Account
         </button>
-      </div> */}
+        <button className="nav-button" onClick={() => navigate('/contact-us')}>
+          Contact Us
+        </button>
+      </nav>
 
       {/* Appointment Section */}
       <div className="ManageAppointment-body">
-        <h2 className='ManageAppointment-title'>Upcoming Appointments</h2>
+        <h2 className='UpcomingAppointment-title'>Upcoming Appointments</h2>
         <div className='ManageAppointment-table'>
           {Appointment1.map((appointment) => (
-            <><div key={appointment.id} className="ManageAppointment-appointment">
-              <p>Doctor: {appointment.Doctor}</p>
-              <p>Concern: {appointment.Concern}</p>
-              <p>Date: {appointment.AppointmentDate.toLocaleDateString()}</p>
-              <p>Time: {appointment.AppointmentTime.toLocaleTimeString()}</p>
+            <div className='ManageAppointment-appointment' key={appointment.id}>
+              <p><span className='label'>Date:</span> {appointment.AppointmentDate.toDateString()}</p>
+              <p><span className='label'>Time:</span> {appointment.AppointmentTime.toLocaleTimeString()}</p>
+              <p><span className='label'>Doctor:</span> {appointment.Doctor}</p>
+              <p><span className='label'>Concern:</span> {appointment.Concern}</p>
               <div className="ManageAppointment-buttons">
                 <button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
-                    Reschedule
+                  Reschedule
                 </button>
                 <button className="cancel-button" onClick={() => navigate('/cancel-appointment')}>
-                    Cancel
+                  Cancel
                 </button>
               </div>
             </div>
-            </>))}
+          ))}
+        </div>
       </div>
-    </div>
-  </div>
+    </div >
   );
 }
 

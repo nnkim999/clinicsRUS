@@ -1,57 +1,183 @@
 
   /* ManageAppointment container Styling */
 .ManageAppointment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
   font-family: Arial, sans-serif;
-  padding: 20px;
+  /* padding: 20px;
+  min-height : 100vh; */
 }
   /* Header */
   .ManageAppointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     text-align: center;
-    margin-bottom: 20px;
+    width: 100%;
+    /* margin-bottom: 5px; */
+    margin-top: -30px;
+    padding: 0 20px;
+  }
+
+  .header-left {
+    /* display: flex; */
+    flex: 1;
+    text-align: center;
+    align-items: left;
+    margin-top: 200px;
+    margin-right: -20px;
+  }
+
+  .header-center {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center; 
+    margin-left: -25px;
+    margin-bottom: -20px;
+  }
+
+  .header-right {
+    flex: 1;
+    /* display: flex; */
+    text-align: right;
+    align-items: right;
+    margin-top: 180px;
+    margin-left: -20px;
+  }
+
+  .booking-application-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #183e9f;
+
   }
 
   /* app logo */
   .ManageAppointment-logo {
-    width: 150px;
+    width: 120px;
+    height: auto;
+  }
+
+  .logout-button {
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #183e9f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .logout-button:hover {
+    background-color: #0055aa;
+  }
+
+  /* Navigation styling */
+  .ManageAppointment-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+    margin-bottom: 20px;
+
+  }
+
+  .nav-button {
+    /* flex: 1; */
+    /* padding: 10px 20px; */
+    font-size: 16px;
+    color: #183e9f;
+    border: 1px solid #183e9f;
+    background-color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-button.active {
+    background-color: #183E9F;
+    color: #ffffff;
+    font-size: 20px;
+  }
+
+  .nav-button:not(.active):hover {
+    background-color: #e6f0ff;
+    font-size: 20px;
+  }
+
+  .nav-button:not(.active) {
+    font-size: 20px;
   }
 
   /* appoitments cells Styling */
-  .ManageAppointment-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #003399;
+  .ManageAppointment-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-bottom: 20px;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    /* padding: 20px;
+    min-height : 100vh; */
+
+  }
+  .UpcomingAppointment-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #183e9f;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 0px;
+    /* margin-bottom: 20px; */
   }
 
   .ManageAppointment-table {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0px;
   }
 
-  .ManageAppointment-appoitment {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
+  .ManageAppointment-appointment {
+    border: 1px solid #389cce;
+    border-radius: 5px;
+    padding: 8px 22px;
+    text-align: left;
+    font-size: 18px;
+    padding-left: 27px ;
+    padding-right: 27px;
+    /* display: flex;
+    justify-content: space-between; */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  }
+
+  .ManageAppointment-appointment p{
     display: flex;
-    justify-content: space-between;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: bold;
   }
 
- /* Header styles
- .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-} */
+  .ManageAppointment-appointment .label {
+    color: #389cce;
+    font-weight: bold;
+    margin-right: 7px;
+    font-size: 18px;
+  }
 
 
 
 .reschedule-button {
   background-color: #183E9F;
   color: white;
-  padding: 15px;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -65,7 +191,7 @@
 .cancel-button {
   background-color: #d64d4d;
   color: white;
-  padding: 15px;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -80,22 +206,6 @@
   color:#183E9F;
   font-weight: bold;
 }
-  /* Container styles */
-  .container {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
- 
-  /* .logo {
-    width: 50px;
-    height: auto;
-  } */
   
   /* Title */
   .title {
@@ -104,7 +214,7 @@
     font-size: 18px;
     margin-top: 10px;
   }
-  label {
+  .label {
     display: block;
     font-size: 14px;
     margin-bottom: 4px;
@@ -117,21 +227,6 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-/* appoitments cells Styling */
-.appointment-cells {
-  border: 1px solid #ddd;
-  margin: 10px;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.ManageAppointment-appoitment h2 {
-  font-size: 1.5rem;
-}
-
-.ManageAppointment-appoitment p {
-  margin: 0.5rem 0;
-}
   
   .main-button {
     background-color: #183e9f;
@@ -142,73 +237,7 @@
     font-size: 14px;
     cursor: pointer;
   }
-  
-  /* Filter styles
-  .filter-container {
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-  }
-  
-  .filter-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-  }
-  
-  .collapse-button {
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  .filter-content {
-    margin-top: 10px;
-  }
-  
-  .filter-item {
-    margin-bottom: 10px;
-  } */
-  
-  /* .filter-buttons {
-    display: flex;
-    justify-content: space-between;
-  } */
-  
-  /* .reset-button,
-  .filter-button {
-    background-color: #183e9f;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .reset-button:hover,
-  .filter-button:hover {
-    background-color: #142c7e;
-  } */
-
-
-
-
-
-.ManageAppointment-body {
-  padding: 1rem;
-}
-
-
-/* greyed out cells Styling
-.greyed-out {
-  background-color: #e0e0e0;
-  color: #777;
-} */
-
+ 
 .active {
     background-color: white;
     color: black;
@@ -219,19 +248,4 @@
   display: flex;
   gap: 10px;
 }
-
-/* .reschedule-btn,
-.cancel-btn {
-  background-color: #183e9f;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.reschedule-btn:hover,
-.cancel-btn:hover {
-  background-color: #0056b3;
-} */
 
