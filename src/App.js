@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import React Router components
 import LandingPage from './Pages/LandingPage';
+import MyAccount from './Pages/MyAccount';
+import ContactUs from './Pages/ContactUs';
 import BookAppointment from './Pages/BookAppointment';
 import AppointmentDetails from './Pages/AppointmentDetails';
 import ManageAppointment from './Pages/ManageAppointment';
@@ -13,6 +15,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} /> {/* Default landing page */}
+          <Route path="/my-account" element={<MyAccount />} /> {/* Route to MyAccount */}
+          <Route path="/contact-us" element={<ContactUs />} /> {/* Route to ContactUs */}
           <Route path="/book-appointment" element={<BookAppointment />} /> {/* Route to BookAppointment */}
           <Route path="/appointment-details" element={<AppointmentDetails />} /> {/* Route to BookAppointment */}
           <Route path="/reschedule-appointment" element={<RescheduleAppointment />} /> {/* Route to RescheduleAppointment */}
