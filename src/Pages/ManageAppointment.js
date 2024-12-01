@@ -4,9 +4,6 @@ import {Appointment1} from '../Data/Appointments';
 import "../Styles/ManageAppointment.css";
 import clinicsruslogo2 from "../Assets/ClinicsRUs.png";
 
-// import '../Styles/ManageAppointment.css'; 
-// import '../App.css';
-
 function ManageAppointment() {
   const navigate = useNavigate(); // Initialize navigate
 
