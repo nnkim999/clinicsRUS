@@ -5,6 +5,9 @@ const ConfirmCancellationModal = ({ onCancel, onConfirm }) => {
   return (
     <div className={styles['modal-overlay']}>
       <div className={styles['modal-content']}>
+        <button className={styles["close-button"]} onClick={onCancel}>
+          &times;
+        </button>
         <h1>Confirm cancellation</h1>
         <p>
           Are you sure you want to cancel your appointment on October 22nd from

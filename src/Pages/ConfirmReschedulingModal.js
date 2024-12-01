@@ -10,6 +10,9 @@ const ConfirmReschedulingModal = ({
   return (
     <div className={styles['modal-overlay']}>
       <div className={styles['modal-content']}>
+        <button className={styles["close-button"]} onClick={onCancel}>
+          &times;
+        </button>
         <div className={styles['modal-header']}>
           <h1>Confirm Rescheduling</h1>
         </div>

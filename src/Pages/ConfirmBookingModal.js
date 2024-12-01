@@ -5,6 +5,9 @@ const ConfirmBookingModal = ({ onCancel, onConfirm, appointment }) => {
   return (
     <div className={styles["modal-overlay"]}>
       <div className={styles["modal-content"]}>
+        <button className={styles["close-button"]} onClick={onCancel}>
+          &times;
+        </button>
         <h1>Confirm Booking</h1>
         <p>Are you sure you want to confirm the following appointment?</p>
         <div className={styles["appointment-card"]}>
@@ -18,10 +21,16 @@ const ConfirmBookingModal = ({ onCancel, onConfirm, appointment }) => {
           </div>
         </div>
         <div className={styles["modal-buttons"]}>
-          <button className={`${styles["modal-button"]} ${styles["cancel-button"]}`} onClick={onCancel}>
+          <button
+            className={`${styles["modal-button"]} ${styles["cancel-button"]}`}
+            onClick={onCancel}
+          >
             No
           </button>
-          <button className={`${styles["modal-button"]} ${styles["confirm-button"]}`} onClick={onConfirm}>
+          <button
+            className={`${styles["modal-button"]} ${styles["confirm-button"]}`}
+            onClick={onConfirm}
+          >
             Yes
           </button>
         </div>
