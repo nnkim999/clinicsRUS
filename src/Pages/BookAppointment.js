@@ -6,6 +6,7 @@ import { AvailableAppointments } from "../Data/AvailableAppointments";
 import FilterComponent from "../Components/FilterComponent";
 import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
+import ClinicsRUsLogo from "../ClinicsRUs.png";
 
 function AppointmentBooking() {
   const navigate = useNavigate(); 
@@ -160,11 +161,11 @@ function AppointmentBooking() {
     <><header>
       
     </header><><div className="container">
-      <div className="header">
+      <div className="header mb-0">
         <button className="main-button">Main</button>
         <img
-          src="/logo.png" // Replace with the actual logo path
-          alt="ClinicsRUs Logo"
+          src={ClinicsRUsLogo} // Use the imported logo here
+          alt="Clinic Logo"
           className="logo"
         />
       </div>

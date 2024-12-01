@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../Styles/AppointmentDetails.css";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import ConfirmReschedulingModal from "./ConfirmReschedulingModal";
+import ClinicsRUsLogo from "../ClinicsRUs.png";
 
 const AppointmentRescheduleDetails = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const AppointmentRescheduleDetails = () => {
       <header className="header">
         <button className="back-button" onClick={() => navigate('/book-appointment')}>Back</button>
         <img
-          src="/logo.png" // Path to your logo in the public folder
+          src={ClinicsRUsLogo} // Use the imported logo here
           alt="Clinic Logo"
           className="logo"
         />
