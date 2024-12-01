@@ -9,13 +9,11 @@ function ContactUs() {
   return (
     <div className="contact-us-container">
       <header className="contact-us-header">
-        <div className="header-top">
           <img
             src={ClinicsRUsLogo}
             alt="ClinicsRUs Logo"
             className="contact-us-logo"
           />
-        </div>
         <p className="contact-us-description">Booking Application</p>
       </header>
 
