@@ -12,7 +12,6 @@
   
   /* Header section */
   .contact-us-header {
-    width: 100%;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -20,6 +19,7 @@
   .contact-us-logo {
     width: 350px;
     height: auto;
+    margin-bottom: -50px;
   }
   
   .contact-us-description {
@@ -59,24 +59,30 @@
   .contact-us-main {
     width: 100%;
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   .contact-us-title {
     font-size: 18px;
     font-weight: bold;
     color: #183e9f;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
   }
   
   .contact-us-details {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    align-items: flex-start;
   }
   
   .contact-item {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     font-size: 14px;
   }

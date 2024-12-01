@@ -10,34 +10,45 @@
   min-height: 100vh;
 }
 
-/* Header styling */
-.my-account-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 0 20px;
-}
+  /* Header */
+  .my-account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    /* margin-bottom: 5px; */
+    margin-top: -30px;
+    padding: 0 20px;
+  }
 
-.header-left {
-  flex: 1;
-  text-align: left;
-  margin-top: 200px;
-}
+  .header-left {
+    /* display: flex; */
+    flex: 1;
+    text-align: center;
+    align-items: left;
+    margin-top: 200px;
+    margin-right: -20px;
+  }
 
-.header-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  margin-left: -25px;
-}
+  .header-center {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center; 
+    margin-left: -25px;
+    margin-bottom: -20px;
+  }
 
-.header-right {
-  flex: 1;
-  text-align: right;
-  margin-top: 200px;
-}
+  .header-right {
+    flex: 1;
+    /* display: flex; */
+    text-align: right;
+    align-items: right;
+    margin-top: 180px;
+    margin-left: -20px;
+  }
+
 
 .booking-application-text {
   font-size: 20px;
@@ -46,9 +57,11 @@
 }
 
 .my-account-logo {
-  width: 200px; /* Logo width as specified */
+  width: 120px; /* Logo width as specified */
   height: auto;
 }
+
+
 
 .logout-button {
   padding: 10px 20px;

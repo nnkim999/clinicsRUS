@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "../Styles/AppointmentDetails.css";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import ConfirmBookingModal from "./ConfirmBookingModal";
-import ClinicsRUsLogo from "../ClinicsRUs.png"; // Correctly import the logo
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import ConfirmReschedulingModal from "./ConfirmReschedulingModal";
+import ClinicsRUsLogo from "../ClinicsRUs.png";
 
-const AppointmentDetails = () => {
+const AppointmentRescheduleDetails = () => {
   const navigate = useNavigate();
   const [concern, setConcern] = useState("General");
   const [customConcern, setCustomConcern] = useState("");
@@ -16,7 +16,6 @@ const AppointmentDetails = () => {
       setCustomConcern(""); // Reset custom concern when not "Other"
     }
   };
-
   const handleConfirmClick = () => {
     setIsModalOpen(true); // Open the modal
   };
@@ -24,6 +23,7 @@ const AppointmentDetails = () => {
   const handleCancelModal = () => {
     setIsModalOpen(false); // Close the modal
   };
+  
 
   const handleConfirmModal = () => {
     // Logic to confirm the appointment (e.g., API call, redirect, etc.)
@@ -32,22 +32,27 @@ const AppointmentDetails = () => {
     navigate("/final-confirmation");
   };
 
-  const appointmentDetails = {
+
+  const formerAppointment = {
     date: "2",
     month: "October",
     time: "2:00pm - 3:00pm",
     doctor: "Dr. K",
   };
+  
+  const newAppointment = {
+    date: "3",
+    month: "October",
+    time: "3:00pm - 4:00pm",
+    doctor: "Dr. L",
+  };
+ 
+  
 
   return (
     <div className="appointment-details-container">
       <header className="header">
-        <button
-          className="back-button"
-          onClick={() => navigate("/book-appointment")}
-        >
-          Back
-        </button>
+        <button className="back-button" onClick={() => navigate('/book-appointment')}>Back</button>
         <img
           src={ClinicsRUsLogo} // Use the imported logo here
           alt="Clinic Logo"
@@ -85,38 +90,35 @@ const AppointmentDetails = () => {
               <option value="Allergies">Allergies</option>
               <option value="Fatigue">Fatigue</option>
               <option value="Chronic Pain">Chronic Pain</option>
-              <option value="Other">
-              Other
-            </option>
-          </select>
-          {concern === "Other" && (
-            <input
-              type="text"
-              placeholder="Type your concern"
-              className="custom-concern-input"
-              value={customConcern}
-              onChange={(e) => setCustomConcern(e.target.value)}
-            />
-          )}
+              <option value="Other">Other</option>
+
+            </select>
+            {concern === "Other" && (
+              <input
+                type="text"
+                placeholder="Type your concern"
+                className="custom-concern-input"
+                value={customConcern}
+                onChange={(e) => setCustomConcern(e.target.value)}
+              />
+            )}
+          </div>
         </div>
-      </div>
-      <button
-        className="confirm-button-appointment"
-        onClick={handleConfirmClick}
-      >
-        Confirm Appointment
-      </button>
-    </main>
-    {/* Render Modal */}
-    {isModalOpen && (
-      <ConfirmBookingModal
-        onCancel={handleCancelModal}
-        onConfirm={handleConfirmModal}
-        appointment={appointmentDetails}
-      />
-    )}
-  </div>
+        <button className="confirm-button-appointment" onClick={handleConfirmClick}>
+          Confirm Appointment
+        </button>
+      </main>
+        {/* Render Modal */}
+        {isModalOpen && (
+          <ConfirmReschedulingModal
+          onCancel={handleCancelModal}
+          onConfirm={handleConfirmModal}
+          formerAppointment={formerAppointment}
+          newAppointment={newAppointment}
+        />
+      )}
+    </div>
   );
 };
 
-export default AppointmentDetails;
+export default AppointmentRescheduleDetails;
