@@ -61,21 +61,38 @@ function ManageAppointment() {
 
       {/* Appointment Section */}
       <div className="ManageAppointment-body">
+        {/* page title */}
+        <h1 className='ManageAppointment-title'>Manage Appointments</h1>
+        <p className="Patient-name">Simon Baxter's</p> {/* Patient's name */}
         <h2 className='UpcomingAppointment-title'>Upcoming Appointments</h2>
         <div className='ManageAppointment-table'>
-          {Appointment1.map((appointment) => (
+          {Appointment1.map((appointment, index) => (
             <div className='ManageAppointment-appointment' key={appointment.id}>
               <p><span className='label'>Date:</span> {appointment.AppointmentDate.toDateString()}</p>
               <p><span className='label'>Time:</span> {appointment.AppointmentTime.toLocaleTimeString()}</p>
               <p><span className='label'>Doctor:</span> {appointment.Doctor}</p>
               <p><span className='label'>Concern:</span> {appointment.Concern}</p>
               <div className="ManageAppointment-buttons">
-                <button className="reschedule-button" onClick={() => navigate('/reschedule-appointment')}>
-                  Reschedule
-                </button>
-                <button className="cancel-button" onClick={() => handleCancelClick(appointment)}>
-                  Cancel
-                </button>
+                <div className='tooltip-container'>
+                  <button
+                    className={`reschedule-button ${index === 0 ? 'disabled' : ''}`}
+                    onClick={() => index !== 0 && navigate('/reschedule-appointment')}
+                    disabled={index === 0} // Disable the button if it's the first appointment
+                  >
+                    Reschedule
+                  </button>
+                  {index === 0 && <span className='tooltiptext'>Unavailable for change. Please contact the clinic for assistance.</span>}
+                </div>
+                <div className='tooltip-container'>
+                  <button
+                    className={`cancel-button ${index === 0 ? 'disabled' : ''}`}
+                    onClick={() => index !== 0 && navigate('/cancel-appointment')}
+                    disabled={index === 0} // Disable the button if it's the first appointment
+                  >
+                    Cancel
+                  </button>
+                  {index === 0 && <span className='tooltiptext'>Unavailable for change. Please contact the clinic for assistance.</span>}
+                </div>
               </div>
             </div>
           ))}
