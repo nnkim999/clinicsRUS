@@ -1,0 +1,22 @@
+.reset-button {
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #183E9F;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #64EBB6;
+}
+
+.filterable-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: block;
+}
