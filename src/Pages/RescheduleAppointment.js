@@ -1,39 +1,43 @@
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import "../Styles/RescheduleAppointments.css";
-import '../App.css';
-import clinicLogo from'../ClinicsRUs.png';
-//import FilterComponent from '../Components/FilterComponent';
+import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import "../Styles/RescheduleAppointments 2.css";
+import "../App.css";
 import { AvailableAppointments } from "../Data/AvailableAppointments";
-import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
-import Select from 'react-select';
-
-
+import Select from "react-select";
 
 function RescheduleAppointment() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+
+  // States
   const [doctor, setDoctor] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
-  const [clickedButton, setClickedButton] = useState(null); // Track clicked button
-  const [tooltipVisible, setTooltipVisible] = useState(false); // Track tooltip visibility
-  const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
-  const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
-  const [filterValue, setFilterValue] = useState('all');
+  const [clickedButton, setClickedButton] = useState(null);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [isFilterVisible, setIsFilterVisible] = useState(true);
+  const [selectedDoctors, setSelectedDoctors] = useState([]);
+  const [filterValue, setFilterValue] = useState("all");
+  
+  const [dateRange, setDateRange] = useState({
+    startDate: "2024-12-03",
+    endDate: "2024-12-04",
+  });
 
   const doctorOptions = [
-    { value: 'doctor1', label: 'Dr. X' },
-    { value: 'doctor2', label: 'Dr. Y' },
-    { value: 'doctor3', label: 'Dr. Bob Brown' },
-    { value: 'doctor4', label: 'Dr. Alice Green' },
+    { value: "doctor1", label: "Dr. X" },
+    { value: "doctor2", label: "Dr. Y" },
+    { value: "doctor3", label: "Dr. Bob Brown" },
+    { value: "doctor4", label: "Dr. Alice Green" },
   ];
 
   const handleDoctorChange = (selectedOptions) => {
-    setSelectedDoctors(selectedOptions ? selectedOptions.map(option => option.value) : []);
+    setSelectedDoctors(
+      selectedOptions ? selectedOptions.map((option) => option.value) : []
+    );
   };
 
   const resetFilters = () => {
-    setFilterValue('all');
+    setFilterValue("all");
     setDoctor("");
     setDateFrom("");
     setDateTo("");
@@ -41,28 +45,28 @@ function RescheduleAppointment() {
   };
 
   const applyFilters = () => {
-    alert(`Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`);
+    alert(
+      `Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`
+    );
   };
 
   const toggleFilterVisibility = () => {
     setIsFilterVisible(!isFilterVisible);
   };
 
+  // Derived list of dates based on dateRange
+  const dates = useMemo(() => {
+    const result = [];
+    let currentDate = new Date(dateRange.startDate);
+    const endDate = new Date(dateRange.endDate);
+    while (currentDate <= endDate) {
+      result.push(currentDate.toISOString().split("T")[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return result;
+  }, [dateRange]);
 
-  const timeSlots = [
-    "9:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-  ];
-  const dates = ["2024-12-03", "2024-12-04"]; // Example dates (can be dynamic)
-
-  // Format date to display in header
+  // Format date for display
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-US", {
       weekday: "short",
@@ -71,7 +75,7 @@ function RescheduleAppointment() {
     });
   };
 
-  // Check appointment status for a specific time slot
+  // Check appointment status
   const getTimeSlotStatus = (date, time) => {
     const appointment = AvailableAppointments.find((appt) => {
       const apptDate = new Date(appt.AppointmentDate).toDateString();
@@ -89,40 +93,74 @@ function RescheduleAppointment() {
         doctor: appointment.Doctor,
       };
     }
-    return null; // No matching appointment
+    return null;
   };
 
-  // Handle button click to toggle selection
   const handleButtonClick = (date, time) => {
     const buttonKey = `${date}-${time}`;
-    if (clickedButton === buttonKey) {
-      setClickedButton(null); // Deselect
-    } else {
-      setClickedButton(buttonKey); // Select the clicked button
-    }
+    setClickedButton((prev) => (prev === buttonKey ? null : buttonKey));
   };
 
-  // Toggle tooltip visibility
   const toggleTooltip = () => {
     setTooltipVisible((prev) => !prev);
   };
 
-  // Render the appointment table
+  const navigatePrev = () => {
+    const prevStart = new Date(dateRange.startDate);
+    const prevEnd = new Date(dateRange.endDate);
+    prevStart.setDate(prevStart.getDate() - 2);
+    prevEnd.setDate(prevEnd.getDate() - 2);
+    setDateRange({
+      startDate: prevStart.toISOString().split("T")[0],
+      endDate: prevEnd.toISOString().split("T")[0],
+    });
+  };
+
+  const navigateNext = () => {
+    const nextStart = new Date(dateRange.startDate);
+    const nextEnd = new Date(dateRange.endDate);
+    nextStart.setDate(nextStart.getDate() + 2);
+    nextEnd.setDate(nextEnd.getDate() + 2);
+    setDateRange({
+      startDate: nextStart.toISOString().split("T")[0],
+      endDate: nextEnd.toISOString().split("T")[0],
+    });
+  };
+
   const renderTable = () => {
+    const timeSlots = [
+      "9:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+    ];
+
     return (
-      <div className="appointment-table">
-        <div className="table-header">
-          <div className="time-column"></div>
-          {dates.map((date) => (
-            <div key={date} className="date-column">
-              {formatDate(date)}
-            </div>
-          ))}
+      <>
+        <div className="table-navigation">
+          <button onClick={navigatePrev}>&lt;</button>
+          <span>{`${formatDate(dateRange.startDate)} - ${formatDate(
+            dateRange.endDate
+          )}`}</span>
+          <button onClick={navigateNext}>&gt;</button>
         </div>
-        <div className="table-body">
-          {timeSlots.map((time) => (
-            <React.Fragment key={time}>
-              <div className="time-row">
+        <div className="appointment-table">
+          <div className="table-header">
+            <div className="time-column"></div>
+            {dates.map((date) => (
+              <div key={date} className="date-column">
+                {formatDate(date)}
+              </div>
+            ))}
+          </div>
+          <div className="table-body">
+            {timeSlots.map((time) => (
+              <div key={time} className="time-row">
                 <div className="time-cell">{time}</div>
                 {dates.map((date) => {
                   const status = getTimeSlotStatus(date, time);
@@ -134,17 +172,13 @@ function RescheduleAppointment() {
                       {status ? (
                         <button
                           className={`book-button ${
-                            clickedButton === `${date}-${time}`
-                              ? "clicked"
-                              : ""
+                            clickedButton === `${date}-${time}` ? "clicked" : ""
                           }`}
                           onClick={() => handleButtonClick(date, time)}
                         >
                           <div className="button-content">{time}</div>
                           {status.status === "booked" && (
-                            <div className="doctor-name">
-                              {status.doctor}
-                            </div>
+                            <div className="doctor-name">{status.doctor}</div>
                           )}
                         </button>
                       ) : null}
@@ -152,13 +186,12 @@ function RescheduleAppointment() {
                   );
                 })}
               </div>
-            </React.Fragment>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </>
     );
   };
-
 
   return (
     <><header>
@@ -172,11 +205,18 @@ function RescheduleAppointment() {
           className="logo"
         />
       </div>
-      <h1 style={{color: '#183E9F',fontWeight: 'bold' }}>Reschedule an Appointment</h1>
-      <h3 >Current Appointment:</h3>
+      <h1>Reschedule Appointment</h1>
+      <h3 style={{ color: '#183E9F', fontWeight: 'bold' }}>Current Appointment:</h3>
+      <div className="current-appointment-box">
+        <div className="appointment-details">
+          <div className="appointment-date">17 Sept</div>
+          <div className="appointment-time">11:00am - 12:00pm</div>
+          <div className="appointment-doctor">Dr. K</div>
+        </div>
+      </div>
       <div className="filter-container">
         <div className="filter-header">
-          <span>Filter</span>
+          <span>Filter Appintment By:</span>
           <button className="collapse-button" onClick={toggleFilterVisibility}>
             {isFilterVisible ? "\u25B2" : "\u25BC"} {/* ▲ for open, ▼ for collapsed */}
           </button>
@@ -225,9 +265,8 @@ function RescheduleAppointment() {
       </div>
     </div>
     <div className="container">
-      {/* Render the table */}
+      {/* Other UI code */}
       {renderTable()}
-
       {/* Legend */}
       <div className="legend-container">
         <div className="legend-item">

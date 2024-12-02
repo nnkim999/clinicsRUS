@@ -1,0 +1,106 @@
+h1 {
+    color:#183E9F;
+    font-weight: bold;
+}
+
+
+
+/*header*/
+.header-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.header-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-button {
+    background-color: #183E9F;
+    color: white;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: default;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-button.available {
+    background-color: #183E9F;
+    color: white;
+}
+
+.back-button.selected {
+    background-color: #64EBB6;
+    color: white;
+    position: relative;
+}
+
+.current-appointment-box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    margin-bottom: 16px;
+    width: auto;
+}
+  
+.appointment-details {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+  
+.appointment-date {
+    font-size: 18px;
+    font-weight: bold;
+}
+  
+.appointment-time {
+    margin-top: 4px;
+}
+  
+.appointment-doctor {
+    margin-top: 2px;
+    font-style: italic;
+}
+
+.table-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.table-navigation button {
+    background-color: #183E9F;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 8px;
+}
+
+.table-navigation button:hover {
+    background-color: #1257ab;
+}
+
+.table-navigation span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+  
