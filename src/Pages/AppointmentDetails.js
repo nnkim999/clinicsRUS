@@ -34,9 +34,9 @@ const AppointmentDetails = () => {
 
   const appointmentDetails = {
     date: "2",
-    month: "October",
-    time: "2:00pm - 3:00pm",
-    doctor: "Dr. K",
+    month: "December",
+    time: "9:00am - 10:00am",
+    doctor: "Dr. X",
   };
 
   return (
@@ -59,13 +59,13 @@ const AppointmentDetails = () => {
         <div className="appointment-card">
           <h2>Appointment 1:</h2>
           <p>
-            <strong>Date:</strong> Oct 2nd, 2024
+            <strong>Date:</strong> Dec 2nd, 2024
           </p>
           <p>
-            <strong>Time:</strong> 2:00pm - 3:00pm
+            <strong>Time:</strong> 9:00am - 10:00am
           </p>
           <p>
-            <strong>Doctor:</strong> Dr. K
+            <strong>Doctor:</strong> Dr. X
           </p>
           <div className="concern-row">
             <strong>Specific Concern:</strong>

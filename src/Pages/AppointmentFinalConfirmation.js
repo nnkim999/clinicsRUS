@@ -41,9 +41,9 @@ function AppointmentConfirmation() {
           </thead>
           <tbody>
             <tr>
-              <td>19 Sept, 2024</td>
-              <td>11:00 am to 12:00 pm</td>
-              <td>Dr. K</td>
+              <td>2 Dec, 2024</td>
+              <td>9:00 am to 10:00 am</td>
+              <td>Dr. X</td>
               <td>General</td>
             </tr>
           </tbody>
