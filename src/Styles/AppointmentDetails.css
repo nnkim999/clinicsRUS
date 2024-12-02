@@ -58,21 +58,22 @@
     color: #183e9f;
   }
   
-  /* Concern Row */
   .concern-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+    flex-direction: column; /* Makes the label and dropdown stack vertically */
+    align-items: flex-start; /* Aligns them to the left */
+    margin: 20px 0;
     color: #183e9f;
   }
   
+
   .dropdown {
     border: 1px solid #183e9f;
     border-radius: 5px;
     padding: 5px;
     font-size: 16px;
     color: #183e9f;
+    margin-bottom: 5px;
+    width: 100%
   }
   
   .confirm-button-appointment {
@@ -102,6 +103,21 @@
     border-radius: 4px;
     width: 50%;
     max-width: 300px;
+    height: 90px;
   }
   
+  .custom-concern-container {
+    margin-top: 10px; /* Adds spacing between the dropdown and the input */
+    display: flex;
+    justify-content: center; /* Centers the input box horizontally */
+  }
+  
+  .custom-concern-input {
+    width: 100%; /* Makes the input take up the full width of its container */
+    max-width: 350px; /* Limits the maximum width */
+    padding: 10px; /* Makes the text box larger with padding */
+    font-size: 14px; /* Increases font size for better readability */
+    border: 1px solid #183e9f; /* Matches the dropdown styling */
+    border-radius: 5px;
+  }
   

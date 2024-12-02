@@ -94,6 +94,7 @@ const AppointmentRescheduleDetails = () => {
 
             </select>
             {concern === "Other" && (
+            <div className="custom-concern-container">
               <input
                 type="text"
                 placeholder="Type your concern"
@@ -101,7 +102,8 @@ const AppointmentRescheduleDetails = () => {
                 value={customConcern}
                 onChange={(e) => setCustomConcern(e.target.value)}
               />
-            )}
+            </div>
+          )}
           </div>
         </div>
         <button className="confirm-button-appointment" onClick={handleConfirmClick}>

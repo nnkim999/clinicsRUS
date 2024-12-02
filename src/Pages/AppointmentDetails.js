@@ -90,13 +90,15 @@ const AppointmentDetails = () => {
             </option>
           </select>
           {concern === "Other" && (
-            <input
-              type="text"
-              placeholder="Type your concern"
-              className="custom-concern-input"
-              value={customConcern}
-              onChange={(e) => setCustomConcern(e.target.value)}
-            />
+            <div className="custom-concern-container">
+              <input
+                type="text"
+                placeholder="Type your concern"
+                className="custom-concern-input"
+                value={customConcern}
+                onChange={(e) => setCustomConcern(e.target.value)}
+              />
+            </div>
           )}
         </div>
       </div>
