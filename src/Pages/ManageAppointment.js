@@ -84,9 +84,9 @@ function ManageAppointment() {
                   {index === 0 && <span className='tooltiptext'>Unavailable for change. Please contact the clinic for assistance.</span>}
                 </div>
                 <div className='tooltip-container'>
-                  <button
+                <button
                     className={`cancel-button ${index === 0 ? 'disabled' : ''}`}
-                    onClick={() => index !== 0 && navigate('/cancel-appointment')}
+                    onClick={() => index !== 0 && handleCancelClick(appointment)} // Open the modal
                     disabled={index === 0} // Disable the button if it's the first appointment
                   >
                     Cancel

@@ -29,6 +29,7 @@
   color: #183e9f;
   font-size: 22px;
   margin-bottom: 15px;
+  font-weight: bold;
 }
 
 .modal-content p {
@@ -52,6 +53,7 @@
   cursor: pointer;
   width: 100px; /* Ensure consistent button size */
   text-align: center;
+  font-weight: bold;
 }
 
 .confirm-button {
