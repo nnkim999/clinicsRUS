@@ -41,7 +41,7 @@ function MyAccount() {
             className="my-account-button"
             onClick={() => navigate('/book-appointment')}
           >
-            Book An Appointment
+            Book Appointment
           </button>
           <button
             className="my-account-button"

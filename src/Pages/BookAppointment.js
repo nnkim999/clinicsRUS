@@ -282,7 +282,7 @@ function AppointmentBooking() {
         disabled={selectedSlots.length === 0} // Enable only when there's at least one selection
         onClick={() => navigate('/appointment-details')}
       >
-        Book appointment
+        Book Appointment
       </button>
 
 

@@ -282,7 +282,7 @@ function RescheduleAppointment() {
         disabled={selectedSlots.length === 0} // Enable only when there's at least one selection
         onClick={() => navigate('/reschedule-appointment-details')}
         >
-        Reschedule appointment
+        Reschedule Appointment
         </button>
 
       </div>

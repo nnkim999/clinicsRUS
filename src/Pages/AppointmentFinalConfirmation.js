@@ -24,7 +24,7 @@ function AppointmentConfirmation() {
       </header>
 
       <main className="confirmation-main">
-        <h1 className="confirmation-title">Appointment confirmed!</h1>
+        <h1 className="confirmation-title">Appointment Confirmed!</h1>
         <p className="confirmation-message">
           Thank you for booking an appointment with us.
           <br />
@@ -53,13 +53,13 @@ function AppointmentConfirmation() {
             className="action-button"
             onClick={() => navigate('/book-appointment')}
           >
-            Book more appointments
+            Book More Appointments
           </button>
           <button
             className="action-button"
             onClick={() => navigate('/manage-appointment')}
           >
-            Manage appointments
+            Manage Appointments
           </button>
         </div>
       </main>
