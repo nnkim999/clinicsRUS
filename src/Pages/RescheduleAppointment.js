@@ -1,9 +1,13 @@
 import React, { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import "../Styles/RescheduleAppointments 2.css";
-import "../App.css";
+import '../App.css';
+//import FilterComponent from '../Components/FilterComponent';
 import { AvailableAppointments } from "../Data/AvailableAppointments";
-import Select from "react-select";
+import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
+import Select from 'react-select';
+import ClinicsRUsLogo from "../ClinicsRUs.png";
+
 
 function RescheduleAppointment() {
   const navigate = useNavigate();
@@ -12,12 +16,13 @@ function RescheduleAppointment() {
   const [doctor, setDoctor] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
-  const [clickedButton, setClickedButton] = useState(null);
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [isFilterVisible, setIsFilterVisible] = useState(true);
-  const [selectedDoctors, setSelectedDoctors] = useState([]);
-  const [filterValue, setFilterValue] = useState("all");
-  
+ 
+  const [clickedButton, setClickedButton] = useState(null); // Track clicked button
+  const [tooltipVisible, setTooltipVisible] = useState(false); // Track tooltip visibility
+  const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
+  const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
+  const [filterValue, setFilterValue] = useState('all');
+  const [selectedSlots, setSelectedSlots] = useState([]); // Maintain a list of selected slots
   const [dateRange, setDateRange] = useState({
     startDate: "2024-12-03",
     endDate: "2024-12-04",
@@ -97,8 +102,16 @@ function RescheduleAppointment() {
   };
 
   const handleButtonClick = (date, time) => {
-    const buttonKey = `${date}-${time}`;
-    setClickedButton((prev) => (prev === buttonKey ? null : buttonKey));
+    const slotKey = `${date}-${time}`;
+    
+    // Check if the slot is already selected
+    if (selectedSlots.includes(slotKey)) {
+      // If selected, deselect it by filtering it out from the list
+      setSelectedSlots(selectedSlots.filter((slot) => slot !== slotKey));
+    } else {
+      // Otherwise, add it to the selected list
+      setSelectedSlots([...selectedSlots, slotKey]);
+    }
   };
 
   const toggleTooltip = () => {
@@ -141,38 +154,55 @@ function RescheduleAppointment() {
     ];
 
     return (
-      <>
-        <div className="table-navigation">
-          <button onClick={navigatePrev}>&lt;</button>
-          <span>{`${formatDate(dateRange.startDate)} - ${formatDate(
-            dateRange.endDate
-          )}`}</span>
-          <button onClick={navigateNext}>&gt;</button>
-        </div>
-        <div className="appointment-table">
-          <div className="table-header">
-            <div className="time-column"></div>
-            {dates.map((date) => (
-              <div key={date} className="date-column">
+      <div className="appointment-table">
+        <div className="table-header">
+          <div className="time-column"></div>
+          {dates.map((date) => {
+            const hasAppointments = timeSlots.some((time) =>
+              getTimeSlotStatus(date, time)
+            );
+  
+            return (
+              <div
+                key={date}
+                className={`date-column ${
+                  hasAppointments ? "" : "no-appointments"
+                }`}
+              >
                 {formatDate(date)}
+                {!hasAppointments && (
+                  <div className="no-appointments-text">
+                    No appointment available
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
+          
           <div className="table-body">
             {timeSlots.map((time) => (
               <div key={time} className="time-row">
                 <div className="time-cell">{time}</div>
                 {dates.map((date) => {
                   const status = getTimeSlotStatus(date, time);
+                  const hasAppointments = timeSlots.some((timeSlot) =>
+                    getTimeSlotStatus(date, timeSlot)
+                  );
+  
                   return (
                     <div
                       key={`${date}-${time}`}
-                      className="appointment-cell"
+                      className={`appointment-cell ${
+                        hasAppointments ? "" : "no-appointments"
+                      }`}
                     >
-                      {status ? (
+                      {status && (
                         <button
                           className={`book-button ${
-                            clickedButton === `${date}-${time}` ? "clicked" : ""
+                            selectedSlots.includes(`${date}-${time}`)
+                              ? "clicked"
+                              : ""
                           }`}
                           onClick={() => handleButtonClick(date, time)}
                         >
@@ -181,27 +211,27 @@ function RescheduleAppointment() {
                             <div className="doctor-name">{status.doctor}</div>
                           )}
                         </button>
-                      ) : null}
+                      )}
                     </div>
                   );
                 })}
               </div>
             ))}
           </div>
-        </div>
-      </>
+      </div>
     );
   };
+  
 
   return (
     <><header>
       
     </header><><div className="container">
-      <div className="header">
+      <div className="header mb-0">
         <button className="main-button">Main</button>
         <img
-          src="/logo.png" // Replace with the actual logo path
-          alt="ClinicsRUs Logo"
+          src={ClinicsRUsLogo} // Use the imported logo here
+          alt="Clinic Logo"
           className="logo"
         />
       </div>
@@ -265,6 +295,13 @@ function RescheduleAppointment() {
       </div>
     </div>
     <div className="container">
+    <div className="table-navigation">
+          <button onClick={navigatePrev}>&lt;</button>
+          <span>{`${formatDate(dateRange.startDate)} - ${formatDate(
+            dateRange.endDate
+          )}`}</span>
+          <button onClick={navigateNext}>&gt;</button>
+        </div>
       {/* Other UI code */}
       {renderTable()}
       {/* Legend */}
@@ -295,11 +332,11 @@ function RescheduleAppointment() {
         </div>
 
         <button
-          className="book-appointment-button"
-          disabled={!clickedButton} // Disable when no slot is selected
-          onClick={() => navigate('/appointment-details')}
+        className="book-appointment-button"
+        disabled={selectedSlots.length === 0} // Enable only when there's at least one selection
+        onClick={() => navigate('/reschedule-appointment-details')}
         >
-          Book appointment
+        Reschedule Appointment
         </button>
 
       </div>
