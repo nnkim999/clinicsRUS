@@ -6,6 +6,7 @@ import { AvailableAppointments } from "../Data/AvailableAppointments";
 import FilterComponent from "../Components/FilterComponent";
 import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
+import ClinicsRUsLogo from "../ClinicsRUs.png";
 
 function AppointmentBooking() {
   const navigate = useNavigate(); 
@@ -17,6 +18,8 @@ function AppointmentBooking() {
   const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
   const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
   const [filterValue, setFilterValue] = useState('all');
+  const [selectedSlots, setSelectedSlots] = useState([]); // Maintain a list of selected slots
+
 
   const doctorOptions = [
     { value: 'doctor1', label: 'Dr. X' },
@@ -89,16 +92,20 @@ function AppointmentBooking() {
     return null; // No matching appointment
   };
 
-  // Handle button click to toggle selection
+
   const handleButtonClick = (date, time) => {
-    const buttonKey = `${date}-${time}`;
-    if (clickedButton === buttonKey) {
-      setClickedButton(null); // Deselect
+    const slotKey = `${date}-${time}`;
+    
+    // Check if the slot is already selected
+    if (selectedSlots.includes(slotKey)) {
+      // If selected, deselect it by filtering it out from the list
+      setSelectedSlots(selectedSlots.filter((slot) => slot !== slotKey));
     } else {
-      setClickedButton(buttonKey); // Select the clicked button
+      // Otherwise, add it to the selected list
+      setSelectedSlots([...selectedSlots, slotKey]);
     }
   };
-
+  
   // Toggle tooltip visibility
   const toggleTooltip = () => {
     setTooltipVisible((prev) => !prev);
@@ -110,11 +117,27 @@ function AppointmentBooking() {
       <div className="appointment-table">
         <div className="table-header">
           <div className="time-column"></div>
-          {dates.map((date) => (
-            <div key={date} className="date-column">
-              {formatDate(date)}
-            </div>
-          ))}
+          {dates.map((date) => {
+            const hasAppointments = timeSlots.some((time) =>
+              getTimeSlotStatus(date, time)
+            );
+  
+            return (
+              <div
+                key={date}
+                className={`date-column ${
+                  hasAppointments ? "" : "no-appointments"
+                }`}
+              >
+                {formatDate(date)}
+                {!hasAppointments && (
+                  <div className="no-appointments-text">
+                    No appointment available
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
         <div className="table-body">
           {timeSlots.map((time) => (
@@ -123,15 +146,21 @@ function AppointmentBooking() {
                 <div className="time-cell">{time}</div>
                 {dates.map((date) => {
                   const status = getTimeSlotStatus(date, time);
+                  const hasAppointments = timeSlots.some((timeSlot) =>
+                    getTimeSlotStatus(date, timeSlot)
+                  );
+  
                   return (
                     <div
                       key={`${date}-${time}`}
-                      className="appointment-cell"
+                      className={`appointment-cell ${
+                        hasAppointments ? "" : "no-appointments"
+                      }`}
                     >
-                      {status ? (
+                      {status && (
                         <button
                           className={`book-button ${
-                            clickedButton === `${date}-${time}`
+                            selectedSlots.includes(`${date}-${time}`)
                               ? "clicked"
                               : ""
                           }`}
@@ -139,12 +168,10 @@ function AppointmentBooking() {
                         >
                           <div className="button-content">{time}</div>
                           {status.status === "booked" && (
-                            <div className="doctor-name">
-                              {status.doctor}
-                            </div>
+                            <div className="doctor-name">{status.doctor}</div>
                           )}
                         </button>
-                      ) : null}
+                      )}
                     </div>
                   );
                 })}
@@ -155,16 +182,16 @@ function AppointmentBooking() {
       </div>
     );
   };
-
+  
   return (
     <><header>
       
     </header><><div className="container">
-      <div className="header">
+      <div className="header mb-0">
         <button className="main-button">Main</button>
         <img
-          src="/logo.png" // Replace with the actual logo path
-          alt="ClinicsRUs Logo"
+          src={ClinicsRUsLogo} // Use the imported logo here
+          alt="Clinic Logo"
           className="logo"
         />
       </div>
@@ -250,13 +277,14 @@ function AppointmentBooking() {
 
         </div>
 
-        <button
-          className="book-appointment-button"
-          disabled={!clickedButton} // Disable when no slot is selected
-          onClick={() => navigate('/appointment-details')}
-        >
-          Book appointment
-        </button>
+              <button
+        className="book-appointment-button"
+        disabled={selectedSlots.length === 0} // Enable only when there's at least one selection
+        onClick={() => navigate('/appointment-details')}
+      >
+        Book Appointment
+      </button>
+
 
       </div>
     </div></></>

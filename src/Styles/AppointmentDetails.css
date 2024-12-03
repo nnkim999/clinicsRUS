@@ -24,14 +24,15 @@
   }
   
   .logo {
-    height: 40px;
+    height: auto;
+    width: 120px;
   }
   
   /* Main Title */
   h1 {
     color: #183e9f;
     font-size: 24px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
   
   /* Appointment Card */
@@ -42,12 +43,13 @@
     margin: 0 auto;
     max-width: 400px;
     text-align: left;
+    margin-top: 50px;
   }
   
   .appointment-card h2 {
     color: #53565f;
     font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   
   .appointment-card p {
@@ -56,25 +58,26 @@
     color: #183e9f;
   }
   
-  /* Concern Row */
   .concern-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+    flex-direction: column; /* Makes the label and dropdown stack vertically */
+    align-items: flex-start; /* Aligns them to the left */
+    margin: 20px 0;
     color: #183e9f;
   }
   
+
   .dropdown {
     border: 1px solid #183e9f;
     border-radius: 5px;
     padding: 5px;
     font-size: 16px;
     color: #183e9f;
+    margin-bottom: 5px;
+    width: 100%
   }
   
   .confirm-button-appointment {
-    background-color: #2d6cdf;
+    background-color: #183e9f;
     color: white;
     border: none;
     border-radius: 5px;
@@ -85,9 +88,36 @@
     right: 20px; /* Distance from the right edge of the screen */
     cursor: pointer;
     z-index: 10; /* Ensure it appears on top of other elements */
+    font-weight: bold;
   }
   
   .confirm-button-appointment:hover {
     background-color: #1a4a9e;
+  }
+
+  .custom-concern-input {
+    margin-top: 0px;
+    padding: 7px;
+    font-size: 11px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50%;
+    max-width: 300px;
+    height: 90px;
+  }
+  
+  .custom-concern-container {
+    margin-top: 10px; /* Adds spacing between the dropdown and the input */
+    display: flex;
+    justify-content: center; /* Centers the input box horizontally */
+  }
+  
+  .custom-concern-input {
+    width: 100%; /* Makes the input take up the full width of its container */
+    max-width: 350px; /* Limits the maximum width */
+    padding: 10px; /* Makes the text box larger with padding */
+    font-size: 14px; /* Increases font size for better readability */
+    border: 1px solid #183e9f; /* Matches the dropdown styling */
+    border-radius: 5px;
   }
   
