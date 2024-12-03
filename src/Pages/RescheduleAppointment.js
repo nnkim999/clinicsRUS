@@ -2,11 +2,10 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../Styles/RescheduleAppointments 2.css";
 import '../App.css';
-//import FilterComponent from '../Components/FilterComponent';
 import { AvailableAppointments } from "../Data/AvailableAppointments";
-import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import ClinicsRUsLogo from "../ClinicsRUs.png";
+
 
 
 function RescheduleAppointment() {
@@ -31,8 +30,7 @@ function RescheduleAppointment() {
   const doctorOptions = [
     { value: "doctor1", label: "Dr. X" },
     { value: "doctor2", label: "Dr. Y" },
-    { value: "doctor3", label: "Dr. Bob Brown" },
-    { value: "doctor4", label: "Dr. Alice Green" },
+    { value: "doctor3", label: "Dr. Z" },
   ];
 
   const handleDoctorChange = (selectedOptions) => {
@@ -228,25 +226,26 @@ function RescheduleAppointment() {
       
     </header><><div className="container">
       <div className="header mb-0">
-        <button className="main-button">Main</button>
+        <button className="main-button" onClick={() => navigate('/manage-appointment')}>Back</button>
         <img
           src={ClinicsRUsLogo} // Use the imported logo here
           alt="Clinic Logo"
           className="logo"
         />
       </div>
-      <h1>Reschedule Appointment</h1>
-      <h3 style={{ color: '#183E9F', fontWeight: 'bold' }}>Current Appointment:</h3>
+      <h1 style={{ color: '#183E9F', fontWeight: 'bold' }}>Reschedule Appointment</h1>
+      <h4 >Current Appointment:</h4>
       <div className="current-appointment-box">
         <div className="appointment-details">
-          <div className="appointment-date">17 Sept</div>
-          <div className="appointment-time">11:00am - 12:00pm</div>
-          <div className="appointment-doctor">Dr. K</div>
+          <div className="appointment-date">Saturday Nov 30th, 2024</div>
+          <div className="appointment-time">2:00pm - 3:00pm</div>
+          <div className="appointment-doctor">Dr. X</div>
+          <div className="appointment-concern">X Ray</div>
         </div>
       </div>
       <div className="filter-container">
         <div className="filter-header">
-          <span>Filter Appintment By:</span>
+          <span>Filter</span>
           <button className="collapse-button" onClick={toggleFilterVisibility}>
             {isFilterVisible ? "\u25B2" : "\u25BC"} {/* ▲ for open, ▼ for collapsed */}
           </button>
@@ -340,6 +339,7 @@ function RescheduleAppointment() {
         </button>
 
       </div>
+      
     </div></></>
   );
 }

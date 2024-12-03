@@ -60,7 +60,7 @@ const AppointmentRescheduleDetails = () => {
         />
       </header>
       <main>
-        <h1>Appointment Details</h1>
+        <h1>New Appointment Details</h1>
         <div className="appointment-card">
           <h2>Appointment 1:</h2>
           <p>

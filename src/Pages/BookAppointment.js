@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import "../App.css";
 import "../Styles/BookAppointment.css";
@@ -19,13 +19,15 @@ function AppointmentBooking() {
   const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
   const [filterValue, setFilterValue] = useState('all');
   const [selectedSlots, setSelectedSlots] = useState([]); // Maintain a list of selected slots
-
+  const [dateRange, setDateRange] = useState({
+    startDate: "2024-12-03",
+    endDate: "2024-12-04",
+  });
 
   const doctorOptions = [
-    { value: 'doctor1', label: 'Dr. X' },
-    { value: 'doctor2', label: 'Dr. Y' },
-    { value: 'doctor3', label: 'Dr. Bob Brown' },
-    { value: 'doctor4', label: 'Dr. Alice Green' },
+    { value: "doctor1", label: "Dr. X" },
+    { value: "doctor2", label: "Dr. Y" },
+    { value: "doctor3", label: "Dr. Z" },
   ];
 
   const handleDoctorChange = (selectedOptions) => {
@@ -47,20 +49,18 @@ function AppointmentBooking() {
   const toggleFilterVisibility = () => {
     setIsFilterVisible(!isFilterVisible);
   };
-
-
-  const timeSlots = [
-    "9:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-  ];
-  const dates = ["2024-12-03", "2024-12-04"]; // Example dates (can be dynamic)
+  
+  // Derived list of dates based on dateRange
+  const dates = useMemo(() => {
+    const result = [];
+    let currentDate = new Date(dateRange.startDate);
+    const endDate = new Date(dateRange.endDate);
+    while (currentDate <= endDate) {
+      result.push(currentDate.toISOString().split("T")[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return result;
+  }, [dateRange]);
 
   // Format date to display in header
   const formatDate = (date) => {
@@ -111,8 +111,43 @@ function AppointmentBooking() {
     setTooltipVisible((prev) => !prev);
   };
 
+  //calendar navigation arrows
+  const navigatePrev = () => {
+    const prevStart = new Date(dateRange.startDate);
+    const prevEnd = new Date(dateRange.endDate);
+    prevStart.setDate(prevStart.getDate() - 2);
+    prevEnd.setDate(prevEnd.getDate() - 2);
+    setDateRange({
+      startDate: prevStart.toISOString().split("T")[0],
+      endDate: prevEnd.toISOString().split("T")[0],
+    });
+  };
+
+  const navigateNext = () => {
+    const nextStart = new Date(dateRange.startDate);
+    const nextEnd = new Date(dateRange.endDate);
+    nextStart.setDate(nextStart.getDate() + 2);
+    nextEnd.setDate(nextEnd.getDate() + 2);
+    setDateRange({
+      startDate: nextStart.toISOString().split("T")[0],
+      endDate: nextEnd.toISOString().split("T")[0],
+    });
+  };
+
   // Render the appointment table
   const renderTable = () => {
+    const timeSlots = [
+      "9:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+    ];
+
     return (
       <div className="appointment-table">
         <div className="table-header">
@@ -188,14 +223,14 @@ function AppointmentBooking() {
       
     </header><><div className="container">
       <div className="header mb-0">
-        <button className="main-button">Main</button>
+        <button className="main-button" onClick={() => navigate('/my-account')}>Main</button>
         <img
           src={ClinicsRUsLogo} // Use the imported logo here
           alt="Clinic Logo"
           className="logo"
         />
       </div>
-      <h1 className="title">Appointment booking</h1>
+      <h1 style={{ color: '#183E9F', fontWeight: 'bold' }}>Appointment booking</h1>
       <div className="filter-container">
         <div className="filter-header">
           <span>Filter</span>
@@ -247,6 +282,13 @@ function AppointmentBooking() {
       </div>
     </div>
     <div className="container">
+    <div className="table-navigation">
+          <button onClick={navigatePrev}>&lt;</button>
+          <span>{`${formatDate(dateRange.startDate)} - ${formatDate(
+            dateRange.endDate
+          )}`}</span>
+          <button onClick={navigateNext}>&gt;</button>
+        </div>
       {/* Render the table */}
       {renderTable()}
 

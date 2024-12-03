@@ -395,3 +395,30 @@
   pointer-events: none; /* Disable clicking */
   opacity: 0.5; /* Make the cells semi-transparent */
 }
+
+.table-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.table-navigation button {
+  background-color: #183E9F;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 8px;
+}
+
+.table-navigation button:hover {
+  background-color: #1257ab;
+}
+
+.table-navigation span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
