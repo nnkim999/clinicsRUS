@@ -10,8 +10,8 @@ const ConfirmCancellationModal = ({ onCancel, onConfirm }) => {
         </button>
         <h1>Confirm cancellation</h1>
         <p>
-          Are you sure you want to cancel your appointment on October 22nd from
-          9:00 am to 10:00 am with Doctor Alia?
+          Are you sure you want to cancel your appointment on November 30th from
+          2:00 pm to 3:00 pm with Doctor X?
         </p>
         <div className={styles['modal-buttons']}>
           <button className={styles['modal-button'] + ' ' + styles['cancel-button']} onClick={onCancel}>
