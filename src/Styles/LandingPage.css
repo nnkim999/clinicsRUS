@@ -63,7 +63,7 @@
   }
   
   .login-title {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     color: #183e9f;
     margin-bottom: 20px;
@@ -84,7 +84,7 @@
   }
   
   .forgot-password {
-    font-size: 12px;
+    font-size: 17px;
     color: #006699;
     text-decoration: none;
     text-align: right;
@@ -96,7 +96,7 @@
   
   .login-button {
     padding: 10px;
-    font-size: 16px;
+    font-size: 25px;
     font-weight: bold;
     color: #ffffff;
     background-color: #183e9f;
