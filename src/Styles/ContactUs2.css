@@ -1,0 +1,101 @@
+/* General container styling */
+.contact-us-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  /* Header section */
+  .contact-us-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .contact-us-logo {
+    width: 350px;
+    height: auto;
+    margin-bottom: -50px;
+  }
+  
+  .contact-us-description {
+    font-size: 22px;
+    color: #183e9f;
+    font-weight: bold;
+  }
+  
+  /* Navigation styling */
+  .contact-us-nav {
+    display: flex;
+    justify-content: center;
+    width: 111%;
+    margin-bottom: 70px;
+  }
+  
+  .nav-button {
+    flex: 1;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #183e9f;
+    border: 1px solid #183e9f;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-button.active {
+    background-color: #183e9f;
+    color: #ffffff;
+  }
+  
+  .nav-button:not(.active):hover {
+    background-color: #e6f0ff;
+  }
+  
+  /* Main content styling */
+  .contact-us-main {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .contact-us-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #183e9f;
+    margin-bottom: 50px;
+  }
+  
+  .contact-us-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+  }
+  
+  .contact-icon {
+    font-size: 20px;
+    color: #183e9f;
+  }
+  
+  .contact-info {
+    font-size: 14px;
+    color: #183e9f;
+    text-align: left;
+  }
+  

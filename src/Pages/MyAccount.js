@@ -28,7 +28,7 @@ function MyAccount() {
 
       <nav className="my-account-nav">
         <button className="nav-button active">My Account</button>
-        <button className="nav-button" onClick={() => navigate('/contact-us')}>
+        <button className="nav-button" onClick={() => navigate('/contact-us2')}>
           Contact Us
         </button>
       </nav>
