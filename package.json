@@ -2,7 +2,7 @@
   "name": "clinicsrus",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nikkikim.github.io/clinicsRUS",
+  "homepage": "https://nnkim999.github.io/clinicsRUS",
   "dependencies": {
     "@svgr/plugin-svgo": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
