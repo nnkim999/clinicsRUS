@@ -90,6 +90,12 @@
     z-index: 10; /* Ensure it appears on top of other elements */
     font-weight: bold;
   }
+
+
+  .logo-button{
+    border: none;
+    padding: 0;
+  }
   
   .confirm-button-appointment:hover {
     background-color: #1a4a9e;

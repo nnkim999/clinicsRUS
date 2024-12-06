@@ -15,11 +15,13 @@ function AppointmentConfirmation() {
           </button>
         </div>
         <div className="header-right">
+        <button className="logo-button" onClick={() => navigate('/my-account')}>
           <img
-            src={ClinicsRUsLogo}
-            alt="ClinicsRUs Logo"
-            className="confirmation-logo"
+            src={ClinicsRUsLogo} // Use the imported logo here
+            alt="Clinic Logo"
+            className="logo"
           />
+        </button>
         </div>
       </header>
 

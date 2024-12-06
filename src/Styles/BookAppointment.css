@@ -297,6 +297,11 @@
     width: 50px;
     height: auto;
   }
+
+  .logo-button{
+    border: none;
+    padding: 0;
+  }
   
   /* Title */
   .title {

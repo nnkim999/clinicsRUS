@@ -47,6 +47,11 @@ h1 {
 }
 
 
+.logo-button{
+  border: none;
+  padding: 0;
+}
+
   /* Style for columns with no available appointments */
   .no-appointments {
     background-color: #f5f5f5; /* Light grey background */
