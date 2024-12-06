@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import "../App.css";
 import "../Styles/BookAppointment.css";
-import { AvailableAppointments } from "../Data/AvailableAppointments";
+import { AvailableAppointments, AppointmentDoctorXFilter, AppointmentDoctorYFilter } from "../Data/AvailableAppointments";
 import FilterComponent from "../Components/FilterComponent";
 import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
@@ -27,7 +27,6 @@ function AppointmentBooking() {
   const doctorOptions = [
     { value: "doctor1", label: "Dr. X" },
     { value: "doctor2", label: "Dr. Y" },
-    { value: "doctor3", label: "Dr. Z" },
   ];
 
   const handleDoctorChange = (selectedOptions) => {
@@ -64,7 +63,7 @@ function AppointmentBooking() {
 
   // Format date to display in header
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString("en-US", {
+    return new Date(date).toLocaleDateString("en-Canada", {
       weekday: "short",
       month: "short",
       day: "numeric",
@@ -74,15 +73,15 @@ function AppointmentBooking() {
   // Check appointment status for a specific time slot
   const getTimeSlotStatus = (date, time) => {
     const appointment = AvailableAppointments.find((appt) => {
-      const apptDate = new Date(appt.AppointmentDate).toDateString();
+      const apptDate = new Date(appt.AppointmentDate).toISOString().split("T")[0];
       const apptTime = new Date(appt.AppointmentTime).getHours();
-
+  
       return (
-        apptDate === new Date(date).toDateString() &&
+        apptDate === date &&
         apptTime === parseInt(time.split(":")[0], 10)
       );
     });
-
+  
     if (appointment) {
       return {
         status: "booked",
@@ -91,6 +90,7 @@ function AppointmentBooking() {
     }
     return null; // No matching appointment
   };
+  
 
 
   const handleButtonClick = (date, time) => {
