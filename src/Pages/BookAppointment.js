@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import "../App.css";
 import "../Styles/BookAppointment.css";
-import { AvailableAppointments, AppointmentDoctorXFilter, AppointmentDoctorYFilter } from "../Data/AvailableAppointments";
+import { AvailableAppointments, AppointmentDoctorXFilter, AppointmentDoctorYFilter, AppointmentDateFilter } from "../Data/AvailableAppointments";
 import FilterComponent from "../Components/FilterComponent";
 import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
@@ -58,6 +58,18 @@ function AppointmentBooking() {
         ...AppointmentDoctorYFilter,
       ];
     }
+
+    // Filter by date range
+    if (dateFrom && dateTo) {
+      const from = new Date(dateFrom).setHours(0, 0, 0, 0); // Normalize to start of day
+      const to = new Date(dateTo).setHours(23, 59, 59, 999); // Normalize to end of day
+
+      filteredData = filteredData.filter((appt) => {
+        const apptDate = new Date(appt.AppointmentDate).setHours(0, 0, 0, 0); // Normalize to date only
+        return apptDate >= from+1 && apptDate <= to+1;
+      });
+    }
+
     setFilteredAppointments(filteredData);
   };
 
@@ -260,20 +272,20 @@ function AppointmentBooking() {
             </div>
             <div className="filter-item">
               <label>Date From:</label>
-              <input
-                type="date"
-                value={dateFrom}
-                onChange={(e) => setDateFrom(e.target.value)}
-                className="input-field"
+                <input
+                  type="date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="input-field"
               />
             </div>
             <div className="filter-item">
               <label>Date To:</label>
               <input
-                type="date"
-                value={dateTo}
-                onChange={(e) => setDateTo(e.target.value)}
-                className="input-field"
+                  type="date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="input-field"
               />
             </div>
             <div className="filter-buttons">
