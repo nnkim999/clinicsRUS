@@ -278,11 +278,14 @@ function AppointmentBooking() {
     </header><><div className="container">
       <div className="header mb-0">
         <button className="main-button" onClick={() => navigate('/my-account')}>Main</button>
-        <img
-          src={ClinicsRUsLogo} // Use the imported logo here
-          alt="Clinic Logo"
-          className="logo"
-        />
+        <button className="logo-button" onClick={() => navigate('/my-account')}>
+          <img
+            src={ClinicsRUsLogo} // Use the imported logo here
+            alt="Clinic Logo"
+            className="logo"
+          />
+        </button>
+
       </div>
       <h1 style={{ color: '#183E9F', fontWeight: 'bold' }}>Appointment booking</h1>
       <div className="filter-container">
