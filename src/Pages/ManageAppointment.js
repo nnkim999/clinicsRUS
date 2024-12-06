@@ -9,6 +9,7 @@ function ManageAppointment() {
   const navigate = useNavigate(); // Initialize navigate
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // State to control modal visibility
   const [selectedAppointment, setSelectedAppointment] = useState(null); // State to hold the selected appointment details for cancellation
+  const [appointments, setAppointments] = useState(Appointment1); // State for managing appointments
 
   // Function to handle opening the cancel modal
   const handleCancelClick = (appointment) => {
@@ -16,15 +17,15 @@ function ManageAppointment() {
     setIsCancelModalOpen(true); // Open the cancel modal
   };
 
-  // Function to handle modal confirmation (e.g., appointment cancellation)
+  // Function to handle modal confirmation (appointment cancellation)
   const handleConfirmCancel = () => {
-    console.log("Appointment Cancelled");
-    setIsCancelModalOpen(false); // Close the cancel modal
-    // You can add the logic to cancel the appointment here (e.g., API call)
-  };
-
-  // Function to handle modal cancellation (closing the modal)
-  const handleCancelModal = () => {
+    if (appointments.length > 2) {
+      const updatedAppointments = appointments.filter((_, index) => index !== 2); // Remove the third appointment
+      setAppointments(updatedAppointments); // Update state with filtered appointments
+      console.log("Appointment Cancelled: Removed Appointment1[2]");
+    } else {
+      console.log("No Appointment1[2] to remove.");
+    }
     setIsCancelModalOpen(false); // Close the cancel modal
   };
 
@@ -61,12 +62,11 @@ function ManageAppointment() {
 
       {/* Appointment Section */}
       <div className="ManageAppointment-body">
-        {/* page title */}
         <h1 className='ManageAppointment-title'>Manage Appointments</h1>
         <p className="Patient-name">Simon Baxter's</p> {/* Patient's name */}
         <h2 className='UpcomingAppointment-title'>Upcoming Appointments</h2>
         <div className='ManageAppointment-table'>
-          {Appointment1.map((appointment, index) => (
+          {appointments.map((appointment, index) => (
             <div className='ManageAppointment-appointment' key={appointment.id}>
               <p><span className='label'>Date:</span> {appointment.AppointmentDate.toDateString()}</p>
               <p><span className='label'>Time:</span> {appointment.AppointmentTime.toLocaleTimeString()}</p>
@@ -84,7 +84,7 @@ function ManageAppointment() {
                   {index === 0 && <span className='tooltiptext'>Unavailable for change. Please contact the clinic for assistance.</span>}
                 </div>
                 <div className='tooltip-container'>
-                <button
+                  <button
                     className={`cancel-button ${index === 0 ? 'disabled' : ''}`}
                     onClick={() => index !== 0 && handleCancelClick(appointment)} // Open the modal
                     disabled={index === 0} // Disable the button if it's the first appointment
@@ -102,8 +102,8 @@ function ManageAppointment() {
       {/* Conditionally render the cancel modal */}
       {isCancelModalOpen && (
         <ConfirmCancellationModal
-          onCancel={handleCancelModal}
-          onConfirm={handleConfirmCancel}
+          onCancel={() => setIsCancelModalOpen(false)} // Close modal when 'No' is clicked
+          onConfirm={handleConfirmCancel} // Confirm cancellation and close modal
         />
       )}
     </div>
