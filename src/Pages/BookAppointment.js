@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import "../App.css";
 import "../Styles/BookAppointment.css";
-import { AvailableAppointments } from "../Data/AvailableAppointments";
+import { AvailableAppointments, AppointmentDoctorXFilter, AppointmentDoctorYFilter, AppointmentDateFilter } from "../Data/AvailableAppointments";
 import FilterComponent from "../Components/FilterComponent";
 import { Dropdown, Button, Form, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
@@ -18,6 +18,7 @@ function AppointmentBooking() {
   const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
   const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
   const [filterValue, setFilterValue] = useState('all');
+  const [filteredAppointments, setFilteredAppointments] = useState(AvailableAppointments); // Appointments to display
   const [selectedSlots, setSelectedSlots] = useState([]); // Maintain a list of selected slots
   const [dateRange, setDateRange] = useState({
     startDate: "2024-12-03",
@@ -27,7 +28,6 @@ function AppointmentBooking() {
   const doctorOptions = [
     { value: "doctor1", label: "Dr. X" },
     { value: "doctor2", label: "Dr. Y" },
-    { value: "doctor3", label: "Dr. Z" },
   ];
 
   const handleDoctorChange = (selectedOptions) => {
@@ -35,15 +35,42 @@ function AppointmentBooking() {
   };
 
   const resetFilters = () => {
-    setFilterValue('all');
     setDoctor("");
     setDateFrom("");
     setDateTo("");
     setSelectedDoctors([]);
+    setFilteredAppointments(AvailableAppointments); // Reset to show all appointments
   };
 
   const applyFilters = () => {
-    alert(`Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`);
+    let filteredData = AvailableAppointments;
+
+    if (selectedDoctors.includes("doctor1")) {
+      filteredData = AppointmentDoctorXFilter;
+    }
+    if (selectedDoctors.includes("doctor2")) {
+      filteredData = AppointmentDoctorYFilter;
+    }
+    // If both doctors are selected, merge the two filtered lists
+    if (selectedDoctors.includes("doctor1") && selectedDoctors.includes("doctor2")) {
+      filteredData = [
+        ...AppointmentDoctorXFilter,
+        ...AppointmentDoctorYFilter,
+      ];
+    }
+
+    // Filter by date range
+    if (dateFrom && dateTo) {
+      const from = new Date(dateFrom).setHours(0, 0, 0, 0); // Normalize to start of day
+      const to = new Date(dateTo).setHours(23, 59, 59, 999); // Normalize to end of day
+
+      filteredData = filteredData.filter((appt) => {
+        const apptDate = new Date(appt.AppointmentDate).setHours(0, 0, 0, 0); // Normalize to date only
+        return apptDate >= from+1 && apptDate <= to+1;
+      });
+    }
+
+    setFilteredAppointments(filteredData);
   };
 
   const toggleFilterVisibility = () => {
@@ -64,33 +91,25 @@ function AppointmentBooking() {
 
   // Format date to display in header
   const formatDate = (date) => {
-    return new Date(date).toLocaleDateString("en-US", {
+    return new Date(date).toLocaleDateString("en-Canada", {
       weekday: "short",
       month: "short",
       day: "numeric",
     });
   };
 
-  // Check appointment status for a specific time slot
   const getTimeSlotStatus = (date, time) => {
-    const appointment = AvailableAppointments.find((appt) => {
-      const apptDate = new Date(appt.AppointmentDate).toDateString();
+    const appointment = filteredAppointments.find((appt) => {
+      const apptDate = new Date(appt.AppointmentDate).toISOString().split("T")[0];
       const apptTime = new Date(appt.AppointmentTime).getHours();
-
       return (
-        apptDate === new Date(date).toDateString() &&
+        apptDate === date &&
         apptTime === parseInt(time.split(":")[0], 10)
       );
     });
-
-    if (appointment) {
-      return {
-        status: "booked",
-        doctor: appointment.Doctor,
-      };
-    }
-    return null; // No matching appointment
+    return appointment ? { status: "booked", doctor: appointment.Doctor } : null;
   };
+  
 
 
   const handleButtonClick = (date, time) => {
@@ -111,28 +130,63 @@ function AppointmentBooking() {
     setTooltipVisible((prev) => !prev);
   };
 
-  //calendar navigation arrows
+  const isPrevDisabled = dateFrom && new Date(dateRange.startDate) <= new Date(dateFrom);
+  const isNextDisabled = dateTo && new Date(dateRange.endDate) >= new Date(dateTo);
+  
+
   const navigatePrev = () => {
     const prevStart = new Date(dateRange.startDate);
     const prevEnd = new Date(dateRange.endDate);
-    prevStart.setDate(prevStart.getDate() - 2);
-    prevEnd.setDate(prevEnd.getDate() - 2);
-    setDateRange({
-      startDate: prevStart.toISOString().split("T")[0],
-      endDate: prevEnd.toISOString().split("T")[0],
-    });
+  
+    // Check if date filter is applied
+    if (dateFrom && dateTo) {
+      const minStartDate = new Date(dateFrom); // Use the selected start date from the filter
+      if (prevStart > minStartDate) {
+        prevStart.setDate(prevStart.getDate() - 2);
+        prevEnd.setDate(prevEnd.getDate() - 2);
+        setDateRange({
+          startDate: prevStart.toISOString().split("T")[0],
+          endDate: prevEnd.toISOString().split("T")[0],
+        });
+      }
+    } else {
+      // No filter applied, navigate freely
+      prevStart.setDate(prevStart.getDate() - 2);
+      prevEnd.setDate(prevEnd.getDate() - 2);
+      setDateRange({
+        startDate: prevStart.toISOString().split("T")[0],
+        endDate: prevEnd.toISOString().split("T")[0],
+      });
+    }
   };
-
+  
   const navigateNext = () => {
     const nextStart = new Date(dateRange.startDate);
     const nextEnd = new Date(dateRange.endDate);
-    nextStart.setDate(nextStart.getDate() + 2);
-    nextEnd.setDate(nextEnd.getDate() + 2);
-    setDateRange({
-      startDate: nextStart.toISOString().split("T")[0],
-      endDate: nextEnd.toISOString().split("T")[0],
-    });
+  
+    // Check if date filter is applied
+    if (dateFrom && dateTo) {
+      const maxEndDate = new Date(dateTo); // Use the selected end date from the filter
+      if (nextEnd < maxEndDate) {
+        nextStart.setDate(nextStart.getDate() + 2);
+        nextEnd.setDate(nextEnd.getDate() + 2);
+        setDateRange({
+          startDate: nextStart.toISOString().split("T")[0],
+          endDate: nextEnd.toISOString().split("T")[0],
+        });
+      }
+    } else {
+      // No filter applied, navigate freely
+      nextStart.setDate(nextStart.getDate() + 2);
+      nextEnd.setDate(nextEnd.getDate() + 2);
+      setDateRange({
+        startDate: nextStart.toISOString().split("T")[0],
+        endDate: nextEnd.toISOString().split("T")[0],
+      });
+    }
   };
+  
+  
 
   // Render the appointment table
   const renderTable = () => {
@@ -253,20 +307,20 @@ function AppointmentBooking() {
             </div>
             <div className="filter-item">
               <label>Date From:</label>
-              <input
-                type="date"
-                value={dateFrom}
-                onChange={(e) => setDateFrom(e.target.value)}
-                className="input-field"
+                <input
+                  type="date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="input-field"
               />
             </div>
             <div className="filter-item">
               <label>Date To:</label>
               <input
-                type="date"
-                value={dateTo}
-                onChange={(e) => setDateTo(e.target.value)}
-                className="input-field"
+                  type="date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="input-field"
               />
             </div>
             <div className="filter-buttons">
@@ -283,12 +337,24 @@ function AppointmentBooking() {
     </div>
     <div className="container">
     <div className="table-navigation">
-          <button onClick={navigatePrev}>&lt;</button>
-          <span>{`${formatDate(dateRange.startDate)} - ${formatDate(
-            dateRange.endDate
-          )}`}</span>
-          <button onClick={navigateNext}>&gt;</button>
-        </div>
+      <button 
+        onClick={navigatePrev} 
+        disabled={isPrevDisabled} 
+        className={isPrevDisabled ? 'disabled' : ''}
+      >
+        &lt;
+      </button>
+      <span>{`${formatDate(dateRange.startDate)} - ${formatDate(dateRange.endDate)}`}</span>
+      <button 
+        onClick={navigateNext} 
+        disabled={isNextDisabled} 
+        className={isNextDisabled ? 'disabled' : ''}
+      >
+        &gt;
+      </button>
+    </div>
+
+
       {/* Render the table */}
       {renderTable()}
 
