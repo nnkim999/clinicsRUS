@@ -130,28 +130,63 @@ function AppointmentBooking() {
     setTooltipVisible((prev) => !prev);
   };
 
-  //calendar navigation arrows
+  const isPrevDisabled = dateFrom && new Date(dateRange.startDate) <= new Date(dateFrom);
+  const isNextDisabled = dateTo && new Date(dateRange.endDate) >= new Date(dateTo);
+  
+
   const navigatePrev = () => {
     const prevStart = new Date(dateRange.startDate);
     const prevEnd = new Date(dateRange.endDate);
-    prevStart.setDate(prevStart.getDate() - 2);
-    prevEnd.setDate(prevEnd.getDate() - 2);
-    setDateRange({
-      startDate: prevStart.toISOString().split("T")[0],
-      endDate: prevEnd.toISOString().split("T")[0],
-    });
+  
+    // Check if date filter is applied
+    if (dateFrom && dateTo) {
+      const minStartDate = new Date(dateFrom); // Use the selected start date from the filter
+      if (prevStart > minStartDate) {
+        prevStart.setDate(prevStart.getDate() - 2);
+        prevEnd.setDate(prevEnd.getDate() - 2);
+        setDateRange({
+          startDate: prevStart.toISOString().split("T")[0],
+          endDate: prevEnd.toISOString().split("T")[0],
+        });
+      }
+    } else {
+      // No filter applied, navigate freely
+      prevStart.setDate(prevStart.getDate() - 2);
+      prevEnd.setDate(prevEnd.getDate() - 2);
+      setDateRange({
+        startDate: prevStart.toISOString().split("T")[0],
+        endDate: prevEnd.toISOString().split("T")[0],
+      });
+    }
   };
-
+  
   const navigateNext = () => {
     const nextStart = new Date(dateRange.startDate);
     const nextEnd = new Date(dateRange.endDate);
-    nextStart.setDate(nextStart.getDate() + 2);
-    nextEnd.setDate(nextEnd.getDate() + 2);
-    setDateRange({
-      startDate: nextStart.toISOString().split("T")[0],
-      endDate: nextEnd.toISOString().split("T")[0],
-    });
+  
+    // Check if date filter is applied
+    if (dateFrom && dateTo) {
+      const maxEndDate = new Date(dateTo); // Use the selected end date from the filter
+      if (nextEnd < maxEndDate) {
+        nextStart.setDate(nextStart.getDate() + 2);
+        nextEnd.setDate(nextEnd.getDate() + 2);
+        setDateRange({
+          startDate: nextStart.toISOString().split("T")[0],
+          endDate: nextEnd.toISOString().split("T")[0],
+        });
+      }
+    } else {
+      // No filter applied, navigate freely
+      nextStart.setDate(nextStart.getDate() + 2);
+      nextEnd.setDate(nextEnd.getDate() + 2);
+      setDateRange({
+        startDate: nextStart.toISOString().split("T")[0],
+        endDate: nextEnd.toISOString().split("T")[0],
+      });
+    }
   };
+  
+  
 
   // Render the appointment table
   const renderTable = () => {
@@ -302,12 +337,24 @@ function AppointmentBooking() {
     </div>
     <div className="container">
     <div className="table-navigation">
-          <button onClick={navigatePrev}>&lt;</button>
-          <span>{`${formatDate(dateRange.startDate)} - ${formatDate(
-            dateRange.endDate
-          )}`}</span>
-          <button onClick={navigateNext}>&gt;</button>
-        </div>
+      <button 
+        onClick={navigatePrev} 
+        disabled={isPrevDisabled} 
+        className={isPrevDisabled ? 'disabled' : ''}
+      >
+        &lt;
+      </button>
+      <span>{`${formatDate(dateRange.startDate)} - ${formatDate(dateRange.endDate)}`}</span>
+      <button 
+        onClick={navigateNext} 
+        disabled={isNextDisabled} 
+        className={isNextDisabled ? 'disabled' : ''}
+      >
+        &gt;
+      </button>
+    </div>
+
+
       {/* Render the table */}
       {renderTable()}
 
