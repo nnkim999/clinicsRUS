@@ -423,12 +423,12 @@
   color: #333;
 }
 
-button.disabled {
+.table-navigation button.disabled {
   background-color: #d3d3d3;  /* Grey background for disabled state */
   color: #a1a1a1;  /* Grey text */
   cursor: not-allowed;  /* Change cursor to indicate it's disabled */
 }
 
-button.disabled:hover {
+.table-navigation button.disabled:hover {
   background-color: #d3d3d3;  /* No hover effect for disabled state */
 }
