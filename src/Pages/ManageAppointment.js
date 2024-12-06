@@ -69,7 +69,7 @@ function ManageAppointment() {
           {appointments.map((appointment, index) => (
             <div className='ManageAppointment-appointment' key={appointment.id}>
               <p><span className='label'>Date:</span> {appointment.AppointmentDate.toDateString()}</p>
-              <p><span className='label'>Time:</span> {appointment.AppointmentTime.toLocaleTimeString()}</p>
+              <p><span className='label'>Time:</span> {appointment.AppointmentTime.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true })}</p>
               <p><span className='label'>Doctor:</span> {appointment.Doctor}</p>
               <p><span className='label'>Concern:</span> {appointment.Concern}</p>
               <div className="ManageAppointment-buttons">
