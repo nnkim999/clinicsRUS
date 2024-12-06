@@ -233,7 +233,7 @@ function AppointmentBooking() {
       <h1 style={{ color: '#183E9F', fontWeight: 'bold' }}>Appointment booking</h1>
       <div className="filter-container">
         <div className="filter-header">
-          <span>Filter</span>
+          <span>Filter Appointments By:</span>
           <button className="collapse-button" onClick={toggleFilterVisibility}>
             {isFilterVisible ? "\u25B2" : "\u25BC"} {/* ▲ for open, ▼ for collapsed */}
           </button>
