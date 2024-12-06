@@ -15,7 +15,7 @@ export const Appointment1 = [
   },
   {
     id: 3,
-    Concern: "Flu Shot",
+    Concern: "General",
     Doctor: "Dr. X",
     AppointmentDate: new Date("2024-12-03"),  
     AppointmentTime: new Date("2024-12-03T09:00:00"),  
