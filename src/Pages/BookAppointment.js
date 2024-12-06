@@ -18,6 +18,7 @@ function AppointmentBooking() {
   const [isFilterVisible, setIsFilterVisible] = useState(true); //Filter visibility toggle
   const [selectedDoctors, setSelectedDoctors] = useState([]); //doctor multiselect
   const [filterValue, setFilterValue] = useState('all');
+  const [filteredAppointments, setFilteredAppointments] = useState(AvailableAppointments); // Appointments to display
   const [selectedSlots, setSelectedSlots] = useState([]); // Maintain a list of selected slots
   const [dateRange, setDateRange] = useState({
     startDate: "2024-12-03",
@@ -34,15 +35,30 @@ function AppointmentBooking() {
   };
 
   const resetFilters = () => {
-    setFilterValue('all');
     setDoctor("");
     setDateFrom("");
     setDateTo("");
     setSelectedDoctors([]);
+    setFilteredAppointments(AvailableAppointments); // Reset to show all appointments
   };
 
   const applyFilters = () => {
-    alert(`Filters applied:\nDoctor: ${doctor}\nDate From: ${dateFrom}\nDate To: ${dateTo}`);
+    let filteredData = AvailableAppointments;
+
+    if (selectedDoctors.includes("doctor1")) {
+      filteredData = AppointmentDoctorXFilter;
+    }
+    if (selectedDoctors.includes("doctor2")) {
+      filteredData = AppointmentDoctorYFilter;
+    }
+    // If both doctors are selected, merge the two filtered lists
+    if (selectedDoctors.includes("doctor1") && selectedDoctors.includes("doctor2")) {
+      filteredData = [
+        ...AppointmentDoctorXFilter,
+        ...AppointmentDoctorYFilter,
+      ];
+    }
+    setFilteredAppointments(filteredData);
   };
 
   const toggleFilterVisibility = () => {
@@ -70,25 +86,16 @@ function AppointmentBooking() {
     });
   };
 
-  // Check appointment status for a specific time slot
   const getTimeSlotStatus = (date, time) => {
-    const appointment = AvailableAppointments.find((appt) => {
+    const appointment = filteredAppointments.find((appt) => {
       const apptDate = new Date(appt.AppointmentDate).toISOString().split("T")[0];
       const apptTime = new Date(appt.AppointmentTime).getHours();
-  
       return (
         apptDate === date &&
         apptTime === parseInt(time.split(":")[0], 10)
       );
     });
-  
-    if (appointment) {
-      return {
-        status: "booked",
-        doctor: appointment.Doctor,
-      };
-    }
-    return null; // No matching appointment
+    return appointment ? { status: "booked", doctor: appointment.Doctor } : null;
   };
   
 
