@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/clinicsRUS/static/css/main.df761bdc.css",
-    "main.js": "/clinicsRUS/static/js/main.246ac08f.js",
+    "main.js": "/clinicsRUS/static/js/main.1e1571d1.js",
     "static/js/453.10a7bae8.chunk.js": "/clinicsRUS/static/js/453.10a7bae8.chunk.js",
     "static/media/ClinicsRUs.png": "/clinicsRUS/static/media/ClinicsRUs.70ddd8358b5b259ac7c2.png",
     "index.html": "/clinicsRUS/index.html",
     "main.df761bdc.css.map": "/clinicsRUS/static/css/main.df761bdc.css.map",
-    "main.246ac08f.js.map": "/clinicsRUS/static/js/main.246ac08f.js.map",
+    "main.1e1571d1.js.map": "/clinicsRUS/static/js/main.1e1571d1.js.map",
     "453.10a7bae8.chunk.js.map": "/clinicsRUS/static/js/453.10a7bae8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.df761bdc.css",
-    "static/js/main.246ac08f.js"
+    "static/js/main.1e1571d1.js"
   ]
 }
