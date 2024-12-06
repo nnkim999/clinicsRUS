@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/clinicsRUS"> 
       <div className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} /> {/* Default landing page */}
