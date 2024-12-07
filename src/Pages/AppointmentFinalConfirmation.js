@@ -10,7 +10,7 @@ function AppointmentConfirmation() {
     <div className="appointment-confirmation-container">
       <header className="confirmation-header">
         <div className="header-left">
-          <button className="main-button" onClick={() => navigate('/')}>
+          <button className="main-button" onClick={() => navigate('/my-account')}>
             Main
           </button>
         </div>

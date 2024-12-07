@@ -52,7 +52,7 @@ const AppointmentRescheduleDetails = () => {
   return (
     <div className="appointment-details-container">
       <header className="header">
-        <button className="back-button" onClick={() => navigate('/book-appointment')}>Back</button>
+        <button className="back-button" onClick={() => navigate('/reschedule-appointment')}>Back</button>
         <button className="logo-button" onClick={() => navigate('/my-account')}>
           <img
             src={ClinicsRUsLogo} // Use the imported logo here
